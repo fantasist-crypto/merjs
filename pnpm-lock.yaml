@@ -22,6 +22,29 @@ importers:
       rimraf: 3.0.2
       typescript: 4.6.4
 
+  packages/core:
+    specifiers:
+      '@cosmjs/amino': ^0.28.4
+      '@cosmjs/encoding': ^0.28.4
+      '@merjs/proto': workspace:^0.0.5
+      '@protobuf-ts/grpcweb-transport': ^2.5.0
+      '@protobuf-ts/plugin': ^2.5.0
+      '@protobuf-ts/protoc': ^2.5.0
+      '@protobuf-ts/runtime': ^2.5.0
+      bech32: ^2.0.0
+      bignumber.js: ^9.0.2
+    dependencies:
+      '@cosmjs/amino': 0.28.4
+      '@cosmjs/encoding': 0.28.4
+      '@merjs/proto': link:../proto
+      '@protobuf-ts/grpcweb-transport': 2.6.0
+      '@protobuf-ts/runtime': 2.6.0
+      bech32: 2.0.0
+      bignumber.js: 9.0.2
+    devDependencies:
+      '@protobuf-ts/plugin': 2.6.0
+      '@protobuf-ts/protoc': 2.6.0
+
   packages/proto:
     specifiers:
       '@protobuf-ts/plugin': ^2.5.0

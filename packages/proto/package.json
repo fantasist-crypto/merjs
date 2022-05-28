@@ -1,22 +1,25 @@
 {
   "name": "@merjs/proto",
-  "version": "0.0.0",
+  "version": "0.0.6",
   "files": [
-    "./*"
+    "cosmos/",
+    "ethermint/",
+    "google/",
+    "ibc/",
+    "merlion/",
+    "proto/",
+    "tendermint/",
+    "proofs.d.ts/",
+    "proofs.d.ts.map",
+    "proofs.js",
+    "proofs.js.map"
   ],
-  "exports": {
-    "./*": "./dist/*"
-  },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "gen": "protoc --ts_out src --ts_opt long_type_string --proto_path $(PWD)/proto $(find $(PWD)/proto -iname '*.proto')",
-    "dev": "tsc -w",
-    "build": "tsc -b",
-    "prepublish": "node scripts/prepublish.mjs",
-    "postpublish": "node scripts/postpublish.mjs",
-    "clean": "node scripts/postpublish.mjs && rimraf ./dist"
+    "build": "tsc -b"
   },
   "dependencies": {
     "@protobuf-ts/runtime": "^2.5.0",

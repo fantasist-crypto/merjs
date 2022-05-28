@@ -1,6 +1,6 @@
 {
   "name": "@merjs/core",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -21,7 +21,7 @@
   "dependencies": {
     "@cosmjs/amino": "^0.28.4",
     "@cosmjs/encoding": "^0.28.4",
-    "@merjs/proto": "workspace:^0.0.0",
+    "@merjs/proto": "workspace:^0.0.6",
     "@protobuf-ts/grpcweb-transport": "^2.5.0",
     "@protobuf-ts/runtime": "^2.5.0",
     "bech32": "^2.0.0",
