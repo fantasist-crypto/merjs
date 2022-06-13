@@ -36,9 +36,9 @@ export class MsgSend implements Msg {
       typeUrl: '/cosmos.bank.v1beta1.MsgSend',
       value: msgContent,
       encode: async () =>
-        (
-          await import('@merjs/proto/cosmos/bank/v1beta1/tx')
-        ).MsgSend.toBinary(msgContent),
+        (await import('@merjs/proto/cosmos/bank/v1beta1/tx')).MsgSend.toBinary(
+          msgContent,
+        ),
     }
   }
 
