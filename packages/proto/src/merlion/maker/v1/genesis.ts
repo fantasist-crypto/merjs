@@ -22,9 +22,9 @@ export interface GenesisState {
      */
     params?: Params;
     /**
-     * @generated from protobuf field: string collateral_ratio = 2;
+     * @generated from protobuf field: string backing_ratio = 2;
      */
-    collateralRatio: string;
+    backingRatio: string;
 }
 /**
  * Params defines the parameters for the maker module.
@@ -33,23 +33,23 @@ export interface GenesisState {
  */
 export interface Params {
     /**
-     * adjusting collateral step
+     * step of adjusting backing ratio
      *
-     * @generated from protobuf field: string collateral_ratio_step = 1;
+     * @generated from protobuf field: string backing_ratio_step = 1;
      */
-    collateralRatioStep: string;
+    backingRatioStep: string;
     /**
-     * price band for adjusting collateral ratio
+     * price band for adjusting backing ratio
      *
-     * @generated from protobuf field: string collateral_ratio_price_band = 2;
+     * @generated from protobuf field: string backing_ratio_price_band = 2;
      */
-    collateralRatioPriceBand: string;
+    backingRatioPriceBand: string;
     /**
-     * cooldown period for adjusting collateral ratio
+     * cooldown period for adjusting backing ratio
      *
-     * @generated from protobuf field: int64 collateral_ratio_cooldown_period = 3;
+     * @generated from protobuf field: int64 backing_ratio_cooldown_period = 3;
      */
-    collateralRatioCooldownPeriod: string;
+    backingRatioCooldownPeriod: string;
     /**
      * mint Mer price bias ratio
      *
@@ -80,11 +80,11 @@ class GenesisState$Type extends MessageType<GenesisState> {
     constructor() {
         super("merlion.maker.v1.GenesisState", [
             { no: 1, name: "params", kind: "message", T: () => Params, options: { "gogoproto.nullable": false } },
-            { no: 2, name: "collateral_ratio", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"collateral_ratio\"" } }
+            { no: 2, name: "backing_ratio", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"backing_ratio\"" } }
         ]);
     }
     create(value?: PartialMessage<GenesisState>): GenesisState {
-        const message = { collateralRatio: "" };
+        const message = { backingRatio: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<GenesisState>(this, message, value);
@@ -98,8 +98,8 @@ class GenesisState$Type extends MessageType<GenesisState> {
                 case /* merlion.maker.v1.Params params */ 1:
                     message.params = Params.internalBinaryRead(reader, reader.uint32(), options, message.params);
                     break;
-                case /* string collateral_ratio */ 2:
-                    message.collateralRatio = reader.string();
+                case /* string backing_ratio */ 2:
+                    message.backingRatio = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -116,9 +116,9 @@ class GenesisState$Type extends MessageType<GenesisState> {
         /* merlion.maker.v1.Params params = 1; */
         if (message.params)
             Params.internalBinaryWrite(message.params, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* string collateral_ratio = 2; */
-        if (message.collateralRatio !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.collateralRatio);
+        /* string backing_ratio = 2; */
+        if (message.backingRatio !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.backingRatio);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -133,9 +133,9 @@ export const GenesisState = new GenesisState$Type();
 class Params$Type extends MessageType<Params> {
     constructor() {
         super("merlion.maker.v1.Params", [
-            { no: 1, name: "collateral_ratio_step", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"collateral_ratio_step\"" } },
-            { no: 2, name: "collateral_ratio_price_band", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"collateral_ratio_price_band\"" } },
-            { no: 3, name: "collateral_ratio_cooldown_period", kind: "scalar", T: 3 /*ScalarType.INT64*/, options: { "gogoproto.moretags": "yaml:\"collateral_ration_cooldown_period\"" } },
+            { no: 1, name: "backing_ratio_step", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"backing_ratio_step\"" } },
+            { no: 2, name: "backing_ratio_price_band", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"backing_ratio_price_band\"" } },
+            { no: 3, name: "backing_ratio_cooldown_period", kind: "scalar", T: 3 /*ScalarType.INT64*/, options: { "gogoproto.moretags": "yaml:\"backing_ratio_cooldown_period\"" } },
             { no: 4, name: "mint_price_bias", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"mint_price_bias\"" } },
             { no: 5, name: "burn_price_bias", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"burn_price_bias\"" } },
             { no: 6, name: "recollateralize_bonus", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"recollateralize_bonus\"" } },
@@ -143,7 +143,7 @@ class Params$Type extends MessageType<Params> {
         ], { "gogoproto.goproto_stringer": false, "gogoproto.equal": true });
     }
     create(value?: PartialMessage<Params>): Params {
-        const message = { collateralRatioStep: "", collateralRatioPriceBand: "", collateralRatioCooldownPeriod: "0", mintPriceBias: "", burnPriceBias: "", recollateralizeBonus: "", liquidationCommissionFee: "" };
+        const message = { backingRatioStep: "", backingRatioPriceBand: "", backingRatioCooldownPeriod: "0", mintPriceBias: "", burnPriceBias: "", recollateralizeBonus: "", liquidationCommissionFee: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Params>(this, message, value);
@@ -154,14 +154,14 @@ class Params$Type extends MessageType<Params> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string collateral_ratio_step */ 1:
-                    message.collateralRatioStep = reader.string();
+                case /* string backing_ratio_step */ 1:
+                    message.backingRatioStep = reader.string();
                     break;
-                case /* string collateral_ratio_price_band */ 2:
-                    message.collateralRatioPriceBand = reader.string();
+                case /* string backing_ratio_price_band */ 2:
+                    message.backingRatioPriceBand = reader.string();
                     break;
-                case /* int64 collateral_ratio_cooldown_period */ 3:
-                    message.collateralRatioCooldownPeriod = reader.int64().toString();
+                case /* int64 backing_ratio_cooldown_period */ 3:
+                    message.backingRatioCooldownPeriod = reader.int64().toString();
                     break;
                 case /* string mint_price_bias */ 4:
                     message.mintPriceBias = reader.string();
@@ -187,15 +187,15 @@ class Params$Type extends MessageType<Params> {
         return message;
     }
     internalBinaryWrite(message: Params, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string collateral_ratio_step = 1; */
-        if (message.collateralRatioStep !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.collateralRatioStep);
-        /* string collateral_ratio_price_band = 2; */
-        if (message.collateralRatioPriceBand !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.collateralRatioPriceBand);
-        /* int64 collateral_ratio_cooldown_period = 3; */
-        if (message.collateralRatioCooldownPeriod !== "0")
-            writer.tag(3, WireType.Varint).int64(message.collateralRatioCooldownPeriod);
+        /* string backing_ratio_step = 1; */
+        if (message.backingRatioStep !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.backingRatioStep);
+        /* string backing_ratio_price_band = 2; */
+        if (message.backingRatioPriceBand !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.backingRatioPriceBand);
+        /* int64 backing_ratio_cooldown_period = 3; */
+        if (message.backingRatioCooldownPeriod !== "0")
+            writer.tag(3, WireType.Varint).int64(message.backingRatioCooldownPeriod);
         /* string mint_price_bias = 4; */
         if (message.mintPriceBias !== "")
             writer.tag(4, WireType.LengthDelimited).string(message.mintPriceBias);

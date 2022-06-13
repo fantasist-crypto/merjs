@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "merlion/maker/v1/genesis.proto";
 import "merlion/maker/v1/maker.proto";
+import "cosmos/base/v1beta1/coin.proto";
 
 option go_package = "github.com/merlion-zone/merlion/x/maker/types";
 
@@ -64,15 +65,62 @@ service Query {
     option (google.api.http).get = "/merlion/maker/v1/total_collateral";
   }
 
-  // CollateralRatio queries the collateral ratio.
-  rpc CollateralRatio(QueryCollateralRatioRequest)
-      returns (QueryCollateralRatioResponse) {
-    option (google.api.http).get = "/merlion/maker/v1/collateral_ratio";
+  // BackingRatio queries the backing ratio.
+  rpc BackingRatio(QueryBackingRatioRequest)
+      returns (QueryBackingRatioResponse) {
+    option (google.api.http).get = "/merlion/maker/v1/backing_ratio";
   }
 
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/merlion/maker/v1/params";
+  }
+
+  // EstimateMintBySwapIn estimates input of minting by swap.
+  rpc EstimateMintBySwapIn(EstimateMintBySwapInRequest)
+      returns (EstimateMintBySwapInResponse) {
+    option (google.api.http).get = "/merlion/maker/v1/estimate_mint_by_swap_in";
+  }
+
+  // EstimateMintBySwapOut estimates output of minting by swap.
+  rpc EstimateMintBySwapOut(EstimateMintBySwapOutRequest)
+      returns (EstimateMintBySwapOutResponse) {
+    option (google.api.http).get =
+        "/merlion/maker/v1/estimate_mint_by_swap_out";
+  }
+
+  // EstimateBurnBySwapOut estimates output of burning by swap.
+  rpc EstimateBurnBySwapOut(EstimateBurnBySwapOutRequest)
+      returns (EstimateBurnBySwapOutResponse) {
+    option (google.api.http).get =
+        "/merlion/maker/v1/estimate_burn_by_swap_out";
+  }
+
+  // EstimateBuyBackingOut estimates output of buying backing assets.
+  rpc EstimateBuyBackingOut(EstimateBuyBackingOutRequest)
+      returns (EstimateBuyBackingOutResponse) {
+    option (google.api.http).get = "/merlion/maker/v1/estimate_buy_backing_out";
+  }
+
+  // EstimateSellBackingOut estimates output of selling backing assets.
+  rpc EstimateSellBackingOut(EstimateSellBackingOutRequest)
+      returns (EstimateSellBackingOutResponse) {
+    option (google.api.http).get =
+        "/merlion/maker/v1/estimate_sell_backing_out";
+  }
+
+  // EstimateMintByCollateralIn estimates input of minting by collateral.
+  rpc EstimateMintByCollateralIn(EstimateMintByCollateralInRequest)
+      returns (EstimateMintByCollateralInResponse) {
+    option (google.api.http).get =
+        "/merlion/maker/v1/estimate_mint_by_collateral_in";
+  }
+
+  // EstimateBurnByCollateralIn estimates input of burning by collateral.
+  rpc EstimateBurnByCollateralIn(EstimateBurnByCollateralInRequest)
+      returns (EstimateBurnByCollateralInResponse) {
+    option (google.api.http).get =
+        "/merlion/maker/v1/estimate_burn_by_collateral_in";
   }
 }
 
@@ -134,10 +182,10 @@ message QueryTotalCollateralResponse {
   TotalCollateral total_collateral = 1 [ (gogoproto.nullable) = false ];
 }
 
-message QueryCollateralRatioRequest {}
+message QueryBackingRatioRequest {}
 
-message QueryCollateralRatioResponse {
-  string collateral_ratio = 1 [
+message QueryBackingRatioResponse {
+  string backing_ratio = 1 [
     (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
     (gogoproto.nullable) = false
   ];
@@ -151,4 +199,93 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateMintBySwapInRequest {
+  cosmos.base.v1beta1.Coin mint_out = 1 [ (gogoproto.nullable) = false ];
+  string backing_denom = 2;
+  bool full_backing = 3;
+}
+
+message EstimateMintBySwapInResponse {
+  cosmos.base.v1beta1.Coin backing_in = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin lion_in = 2 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin mint_fee = 3 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateMintBySwapOutRequest {
+  cosmos.base.v1beta1.Coin backing_in_max = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin lion_in_max = 2 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateMintBySwapOutResponse {
+  cosmos.base.v1beta1.Coin backing_in = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin lion_in = 2 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin mint_out = 3 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin mint_fee = 4 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateBurnBySwapOutRequest {
+  cosmos.base.v1beta1.Coin burn_in = 1 [ (gogoproto.nullable) = false ];
+  string backing_denom = 2;
+}
+
+message EstimateBurnBySwapOutResponse {
+  cosmos.base.v1beta1.Coin backing_out = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin lion_out = 2 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin burn_fee = 3 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateBuyBackingOutRequest {
+  cosmos.base.v1beta1.Coin lion_in = 1 [ (gogoproto.nullable) = false ];
+  string backing_denom = 2;
+}
+
+message EstimateBuyBackingOutResponse {
+  cosmos.base.v1beta1.Coin backing_out = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin buyback_fee = 2 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateSellBackingOutRequest {
+  cosmos.base.v1beta1.Coin backing_in = 1 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateSellBackingOutResponse {
+  cosmos.base.v1beta1.Coin lion_out = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin sellback_fee = 2 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateMintByCollateralInRequest {
+  string sender = 1;
+  cosmos.base.v1beta1.Coin mint_out = 2 [ (gogoproto.nullable) = false ];
+  string collateral_denom = 3;
+  cosmos.base.v1beta1.Coin lion_in_max = 4 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateMintByCollateralInResponse {
+  cosmos.base.v1beta1.Coin lion_in = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin mint_fee = 2 [ (gogoproto.nullable) = false ];
+  merlion.maker.v1.TotalCollateral total_coll = 3
+      [ (gogoproto.nullable) = false ];
+  merlion.maker.v1.PoolCollateral pool_coll = 4
+      [ (gogoproto.nullable) = false ];
+  merlion.maker.v1.AccountCollateral acc_coll = 5
+      [ (gogoproto.nullable) = false ];
+}
+
+message EstimateBurnByCollateralInRequest {
+  string sender = 1;
+  string collateral_denom = 2;
+  cosmos.base.v1beta1.Coin repay_in_max = 3 [ (gogoproto.nullable) = false ];
+}
+
+message EstimateBurnByCollateralInResponse {
+  cosmos.base.v1beta1.Coin repay_in = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.v1beta1.Coin interest_fee = 2 [ (gogoproto.nullable) = false ];
+  merlion.maker.v1.TotalCollateral total_coll = 3
+      [ (gogoproto.nullable) = false ];
+  merlion.maker.v1.PoolCollateral pool_coll = 4
+      [ (gogoproto.nullable) = false ];
+  merlion.maker.v1.AccountCollateral acc_coll = 5
+      [ (gogoproto.nullable) = false ];
 }

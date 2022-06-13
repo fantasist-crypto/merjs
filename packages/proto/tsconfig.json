@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./",
+    "outDir": "./dist",
     "target": "es2015",
     "module": "commonjs",
     "sourceMap": true,
@@ -12,5 +12,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["proto"]
+  "exclude": ["./proto"],
+  "include": ["./src"]
 }

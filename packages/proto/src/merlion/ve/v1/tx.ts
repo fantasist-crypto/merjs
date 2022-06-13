@@ -38,6 +38,14 @@ export interface MsgCreate {
  * @generated from protobuf message merlion.ve.v1.MsgCreateResponse
  */
 export interface MsgCreateResponse {
+    /**
+     * @generated from protobuf field: string ve_id = 1;
+     */
+    veId: string;
+    /**
+     * @generated from protobuf field: uint64 unlock_time = 2;
+     */
+    unlockTime: string;
 }
 /**
  * @generated from protobuf message merlion.ve.v1.MsgDeposit
@@ -198,19 +206,47 @@ export const MsgCreate = new MsgCreate$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class MsgCreateResponse$Type extends MessageType<MsgCreateResponse> {
     constructor() {
-        super("merlion.ve.v1.MsgCreateResponse", []);
+        super("merlion.ve.v1.MsgCreateResponse", [
+            { no: 1, name: "ve_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "unlock_time", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+        ]);
     }
     create(value?: PartialMessage<MsgCreateResponse>): MsgCreateResponse {
-        const message = {};
+        const message = { veId: "", unlockTime: "0" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<MsgCreateResponse>(this, message, value);
         return message;
     }
     internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: MsgCreateResponse): MsgCreateResponse {
-        return target ?? this.create();
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string ve_id */ 1:
+                    message.veId = reader.string();
+                    break;
+                case /* uint64 unlock_time */ 2:
+                    message.unlockTime = reader.uint64().toString();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
     }
     internalBinaryWrite(message: MsgCreateResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string ve_id = 1; */
+        if (message.veId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.veId);
+        /* uint64 unlock_time = 2; */
+        if (message.unlockTime !== "0")
+            writer.tag(2, WireType.Varint).uint64(message.unlockTime);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

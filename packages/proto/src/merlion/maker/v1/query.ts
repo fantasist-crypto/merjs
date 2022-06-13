@@ -12,6 +12,7 @@ import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MESSAGE_TYPE } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./genesis";
 import { TotalCollateral } from "./maker";
 import { TotalBacking } from "./maker";
@@ -163,18 +164,18 @@ export interface QueryTotalCollateralResponse {
     totalCollateral?: TotalCollateral;
 }
 /**
- * @generated from protobuf message merlion.maker.v1.QueryCollateralRatioRequest
+ * @generated from protobuf message merlion.maker.v1.QueryBackingRatioRequest
  */
-export interface QueryCollateralRatioRequest {
+export interface QueryBackingRatioRequest {
 }
 /**
- * @generated from protobuf message merlion.maker.v1.QueryCollateralRatioResponse
+ * @generated from protobuf message merlion.maker.v1.QueryBackingRatioResponse
  */
-export interface QueryCollateralRatioResponse {
+export interface QueryBackingRatioResponse {
     /**
-     * @generated from protobuf field: string collateral_ratio = 1;
+     * @generated from protobuf field: string backing_ratio = 1;
      */
-    collateralRatio: string;
+    backingRatio: string;
     /**
      * @generated from protobuf field: int64 last_update_block = 2;
      */
@@ -199,6 +200,240 @@ export interface QueryParamsResponse {
      * @generated from protobuf field: merlion.maker.v1.Params params = 1;
      */
     params?: Params;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateMintBySwapInRequest
+ */
+export interface EstimateMintBySwapInRequest {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_out = 1;
+     */
+    mintOut?: Coin;
+    /**
+     * @generated from protobuf field: string backing_denom = 2;
+     */
+    backingDenom: string;
+    /**
+     * @generated from protobuf field: bool full_backing = 3;
+     */
+    fullBacking: boolean;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateMintBySwapInResponse
+ */
+export interface EstimateMintBySwapInResponse {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_in = 1;
+     */
+    backingIn?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in = 2;
+     */
+    lionIn?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_fee = 3;
+     */
+    mintFee?: Coin;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateMintBySwapOutRequest
+ */
+export interface EstimateMintBySwapOutRequest {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_in_max = 1;
+     */
+    backingInMax?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in_max = 2;
+     */
+    lionInMax?: Coin;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateMintBySwapOutResponse
+ */
+export interface EstimateMintBySwapOutResponse {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_in = 1;
+     */
+    backingIn?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in = 2;
+     */
+    lionIn?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_out = 3;
+     */
+    mintOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_fee = 4;
+     */
+    mintFee?: Coin;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateBurnBySwapOutRequest
+ */
+export interface EstimateBurnBySwapOutRequest {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin burn_in = 1;
+     */
+    burnIn?: Coin;
+    /**
+     * @generated from protobuf field: string backing_denom = 2;
+     */
+    backingDenom: string;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateBurnBySwapOutResponse
+ */
+export interface EstimateBurnBySwapOutResponse {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_out = 1;
+     */
+    backingOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_out = 2;
+     */
+    lionOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin burn_fee = 3;
+     */
+    burnFee?: Coin;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateBuyBackingOutRequest
+ */
+export interface EstimateBuyBackingOutRequest {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in = 1;
+     */
+    lionIn?: Coin;
+    /**
+     * @generated from protobuf field: string backing_denom = 2;
+     */
+    backingDenom: string;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateBuyBackingOutResponse
+ */
+export interface EstimateBuyBackingOutResponse {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_out = 1;
+     */
+    backingOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin buyback_fee = 2;
+     */
+    buybackFee?: Coin;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateSellBackingOutRequest
+ */
+export interface EstimateSellBackingOutRequest {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_in = 1;
+     */
+    backingIn?: Coin;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateSellBackingOutResponse
+ */
+export interface EstimateSellBackingOutResponse {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_out = 1;
+     */
+    lionOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin sellback_fee = 2;
+     */
+    sellbackFee?: Coin;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateMintByCollateralInRequest
+ */
+export interface EstimateMintByCollateralInRequest {
+    /**
+     * @generated from protobuf field: string sender = 1;
+     */
+    sender: string;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_out = 2;
+     */
+    mintOut?: Coin;
+    /**
+     * @generated from protobuf field: string collateral_denom = 3;
+     */
+    collateralDenom: string;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in_max = 4;
+     */
+    lionInMax?: Coin;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateMintByCollateralInResponse
+ */
+export interface EstimateMintByCollateralInResponse {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in = 1;
+     */
+    lionIn?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_fee = 2;
+     */
+    mintFee?: Coin;
+    /**
+     * @generated from protobuf field: merlion.maker.v1.TotalCollateral total_coll = 3;
+     */
+    totalColl?: TotalCollateral;
+    /**
+     * @generated from protobuf field: merlion.maker.v1.PoolCollateral pool_coll = 4;
+     */
+    poolColl?: PoolCollateral;
+    /**
+     * @generated from protobuf field: merlion.maker.v1.AccountCollateral acc_coll = 5;
+     */
+    accColl?: AccountCollateral;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateBurnByCollateralInRequest
+ */
+export interface EstimateBurnByCollateralInRequest {
+    /**
+     * @generated from protobuf field: string sender = 1;
+     */
+    sender: string;
+    /**
+     * @generated from protobuf field: string collateral_denom = 2;
+     */
+    collateralDenom: string;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin repay_in_max = 3;
+     */
+    repayInMax?: Coin;
+}
+/**
+ * @generated from protobuf message merlion.maker.v1.EstimateBurnByCollateralInResponse
+ */
+export interface EstimateBurnByCollateralInResponse {
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin repay_in = 1;
+     */
+    repayIn?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin interest_fee = 2;
+     */
+    interestFee?: Coin;
+    /**
+     * @generated from protobuf field: merlion.maker.v1.TotalCollateral total_coll = 3;
+     */
+    totalColl?: TotalCollateral;
+    /**
+     * @generated from protobuf field: merlion.maker.v1.PoolCollateral pool_coll = 4;
+     */
+    poolColl?: PoolCollateral;
+    /**
+     * @generated from protobuf field: merlion.maker.v1.AccountCollateral acc_coll = 5;
+     */
+    accColl?: AccountCollateral;
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class QueryAllBackingRiskParamsRequest$Type extends MessageType<QueryAllBackingRiskParamsRequest> {
@@ -928,21 +1163,21 @@ class QueryTotalCollateralResponse$Type extends MessageType<QueryTotalCollateral
  */
 export const QueryTotalCollateralResponse = new QueryTotalCollateralResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class QueryCollateralRatioRequest$Type extends MessageType<QueryCollateralRatioRequest> {
+class QueryBackingRatioRequest$Type extends MessageType<QueryBackingRatioRequest> {
     constructor() {
-        super("merlion.maker.v1.QueryCollateralRatioRequest", []);
+        super("merlion.maker.v1.QueryBackingRatioRequest", []);
     }
-    create(value?: PartialMessage<QueryCollateralRatioRequest>): QueryCollateralRatioRequest {
+    create(value?: PartialMessage<QueryBackingRatioRequest>): QueryBackingRatioRequest {
         const message = {};
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
-            reflectionMergePartial<QueryCollateralRatioRequest>(this, message, value);
+            reflectionMergePartial<QueryBackingRatioRequest>(this, message, value);
         return message;
     }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryCollateralRatioRequest): QueryCollateralRatioRequest {
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryBackingRatioRequest): QueryBackingRatioRequest {
         return target ?? this.create();
     }
-    internalBinaryWrite(message: QueryCollateralRatioRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+    internalBinaryWrite(message: QueryBackingRatioRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -950,31 +1185,31 @@ class QueryCollateralRatioRequest$Type extends MessageType<QueryCollateralRatioR
     }
 }
 /**
- * @generated MessageType for protobuf message merlion.maker.v1.QueryCollateralRatioRequest
+ * @generated MessageType for protobuf message merlion.maker.v1.QueryBackingRatioRequest
  */
-export const QueryCollateralRatioRequest = new QueryCollateralRatioRequest$Type();
+export const QueryBackingRatioRequest = new QueryBackingRatioRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class QueryCollateralRatioResponse$Type extends MessageType<QueryCollateralRatioResponse> {
+class QueryBackingRatioResponse$Type extends MessageType<QueryBackingRatioResponse> {
     constructor() {
-        super("merlion.maker.v1.QueryCollateralRatioResponse", [
-            { no: 1, name: "collateral_ratio", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec" } },
+        super("merlion.maker.v1.QueryBackingRatioResponse", [
+            { no: 1, name: "backing_ratio", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec" } },
             { no: 2, name: "last_update_block", kind: "scalar", T: 3 /*ScalarType.INT64*/ }
         ]);
     }
-    create(value?: PartialMessage<QueryCollateralRatioResponse>): QueryCollateralRatioResponse {
-        const message = { collateralRatio: "", lastUpdateBlock: "0" };
+    create(value?: PartialMessage<QueryBackingRatioResponse>): QueryBackingRatioResponse {
+        const message = { backingRatio: "", lastUpdateBlock: "0" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
-            reflectionMergePartial<QueryCollateralRatioResponse>(this, message, value);
+            reflectionMergePartial<QueryBackingRatioResponse>(this, message, value);
         return message;
     }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryCollateralRatioResponse): QueryCollateralRatioResponse {
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryBackingRatioResponse): QueryBackingRatioResponse {
         let message = target ?? this.create(), end = reader.pos + length;
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string collateral_ratio */ 1:
-                    message.collateralRatio = reader.string();
+                case /* string backing_ratio */ 1:
+                    message.backingRatio = reader.string();
                     break;
                 case /* int64 last_update_block */ 2:
                     message.lastUpdateBlock = reader.int64().toString();
@@ -990,10 +1225,10 @@ class QueryCollateralRatioResponse$Type extends MessageType<QueryCollateralRatio
         }
         return message;
     }
-    internalBinaryWrite(message: QueryCollateralRatioResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string collateral_ratio = 1; */
-        if (message.collateralRatio !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.collateralRatio);
+    internalBinaryWrite(message: QueryBackingRatioResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string backing_ratio = 1; */
+        if (message.backingRatio !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.backingRatio);
         /* int64 last_update_block = 2; */
         if (message.lastUpdateBlock !== "0")
             writer.tag(2, WireType.Varint).int64(message.lastUpdateBlock);
@@ -1004,9 +1239,9 @@ class QueryCollateralRatioResponse$Type extends MessageType<QueryCollateralRatio
     }
 }
 /**
- * @generated MessageType for protobuf message merlion.maker.v1.QueryCollateralRatioResponse
+ * @generated MessageType for protobuf message merlion.maker.v1.QueryBackingRatioResponse
  */
-export const QueryCollateralRatioResponse = new QueryCollateralRatioResponse$Type();
+export const QueryBackingRatioResponse = new QueryBackingRatioResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class QueryParamsRequest$Type extends MessageType<QueryParamsRequest> {
     constructor() {
@@ -1080,6 +1315,853 @@ class QueryParamsResponse$Type extends MessageType<QueryParamsResponse> {
  * @generated MessageType for protobuf message merlion.maker.v1.QueryParamsResponse
  */
 export const QueryParamsResponse = new QueryParamsResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateMintBySwapInRequest$Type extends MessageType<EstimateMintBySwapInRequest> {
+    constructor() {
+        super("merlion.maker.v1.EstimateMintBySwapInRequest", [
+            { no: 1, name: "mint_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "backing_denom", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "full_backing", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateMintBySwapInRequest>): EstimateMintBySwapInRequest {
+        const message = { backingDenom: "", fullBacking: false };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateMintBySwapInRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateMintBySwapInRequest): EstimateMintBySwapInRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin mint_out */ 1:
+                    message.mintOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintOut);
+                    break;
+                case /* string backing_denom */ 2:
+                    message.backingDenom = reader.string();
+                    break;
+                case /* bool full_backing */ 3:
+                    message.fullBacking = reader.bool();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateMintBySwapInRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin mint_out = 1; */
+        if (message.mintOut)
+            Coin.internalBinaryWrite(message.mintOut, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* string backing_denom = 2; */
+        if (message.backingDenom !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.backingDenom);
+        /* bool full_backing = 3; */
+        if (message.fullBacking !== false)
+            writer.tag(3, WireType.Varint).bool(message.fullBacking);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateMintBySwapInRequest
+ */
+export const EstimateMintBySwapInRequest = new EstimateMintBySwapInRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateMintBySwapInResponse$Type extends MessageType<EstimateMintBySwapInResponse> {
+    constructor() {
+        super("merlion.maker.v1.EstimateMintBySwapInResponse", [
+            { no: 1, name: "backing_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "lion_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 3, name: "mint_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateMintBySwapInResponse>): EstimateMintBySwapInResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateMintBySwapInResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateMintBySwapInResponse): EstimateMintBySwapInResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin backing_in */ 1:
+                    message.backingIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingIn);
+                    break;
+                case /* cosmos.base.v1beta1.Coin lion_in */ 2:
+                    message.lionIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionIn);
+                    break;
+                case /* cosmos.base.v1beta1.Coin mint_fee */ 3:
+                    message.mintFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintFee);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateMintBySwapInResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin backing_in = 1; */
+        if (message.backingIn)
+            Coin.internalBinaryWrite(message.backingIn, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_in = 2; */
+        if (message.lionIn)
+            Coin.internalBinaryWrite(message.lionIn, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin mint_fee = 3; */
+        if (message.mintFee)
+            Coin.internalBinaryWrite(message.mintFee, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateMintBySwapInResponse
+ */
+export const EstimateMintBySwapInResponse = new EstimateMintBySwapInResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateMintBySwapOutRequest$Type extends MessageType<EstimateMintBySwapOutRequest> {
+    constructor() {
+        super("merlion.maker.v1.EstimateMintBySwapOutRequest", [
+            { no: 1, name: "backing_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "lion_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateMintBySwapOutRequest>): EstimateMintBySwapOutRequest {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateMintBySwapOutRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateMintBySwapOutRequest): EstimateMintBySwapOutRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin backing_in_max */ 1:
+                    message.backingInMax = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingInMax);
+                    break;
+                case /* cosmos.base.v1beta1.Coin lion_in_max */ 2:
+                    message.lionInMax = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionInMax);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateMintBySwapOutRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin backing_in_max = 1; */
+        if (message.backingInMax)
+            Coin.internalBinaryWrite(message.backingInMax, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_in_max = 2; */
+        if (message.lionInMax)
+            Coin.internalBinaryWrite(message.lionInMax, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateMintBySwapOutRequest
+ */
+export const EstimateMintBySwapOutRequest = new EstimateMintBySwapOutRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateMintBySwapOutResponse$Type extends MessageType<EstimateMintBySwapOutResponse> {
+    constructor() {
+        super("merlion.maker.v1.EstimateMintBySwapOutResponse", [
+            { no: 1, name: "backing_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "lion_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 3, name: "mint_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 4, name: "mint_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateMintBySwapOutResponse>): EstimateMintBySwapOutResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateMintBySwapOutResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateMintBySwapOutResponse): EstimateMintBySwapOutResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin backing_in */ 1:
+                    message.backingIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingIn);
+                    break;
+                case /* cosmos.base.v1beta1.Coin lion_in */ 2:
+                    message.lionIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionIn);
+                    break;
+                case /* cosmos.base.v1beta1.Coin mint_out */ 3:
+                    message.mintOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintOut);
+                    break;
+                case /* cosmos.base.v1beta1.Coin mint_fee */ 4:
+                    message.mintFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintFee);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateMintBySwapOutResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin backing_in = 1; */
+        if (message.backingIn)
+            Coin.internalBinaryWrite(message.backingIn, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_in = 2; */
+        if (message.lionIn)
+            Coin.internalBinaryWrite(message.lionIn, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin mint_out = 3; */
+        if (message.mintOut)
+            Coin.internalBinaryWrite(message.mintOut, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin mint_fee = 4; */
+        if (message.mintFee)
+            Coin.internalBinaryWrite(message.mintFee, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateMintBySwapOutResponse
+ */
+export const EstimateMintBySwapOutResponse = new EstimateMintBySwapOutResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateBurnBySwapOutRequest$Type extends MessageType<EstimateBurnBySwapOutRequest> {
+    constructor() {
+        super("merlion.maker.v1.EstimateBurnBySwapOutRequest", [
+            { no: 1, name: "burn_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "backing_denom", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateBurnBySwapOutRequest>): EstimateBurnBySwapOutRequest {
+        const message = { backingDenom: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateBurnBySwapOutRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateBurnBySwapOutRequest): EstimateBurnBySwapOutRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin burn_in */ 1:
+                    message.burnIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.burnIn);
+                    break;
+                case /* string backing_denom */ 2:
+                    message.backingDenom = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateBurnBySwapOutRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin burn_in = 1; */
+        if (message.burnIn)
+            Coin.internalBinaryWrite(message.burnIn, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* string backing_denom = 2; */
+        if (message.backingDenom !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.backingDenom);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateBurnBySwapOutRequest
+ */
+export const EstimateBurnBySwapOutRequest = new EstimateBurnBySwapOutRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateBurnBySwapOutResponse$Type extends MessageType<EstimateBurnBySwapOutResponse> {
+    constructor() {
+        super("merlion.maker.v1.EstimateBurnBySwapOutResponse", [
+            { no: 1, name: "backing_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "lion_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 3, name: "burn_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateBurnBySwapOutResponse>): EstimateBurnBySwapOutResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateBurnBySwapOutResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateBurnBySwapOutResponse): EstimateBurnBySwapOutResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin backing_out */ 1:
+                    message.backingOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingOut);
+                    break;
+                case /* cosmos.base.v1beta1.Coin lion_out */ 2:
+                    message.lionOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionOut);
+                    break;
+                case /* cosmos.base.v1beta1.Coin burn_fee */ 3:
+                    message.burnFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.burnFee);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateBurnBySwapOutResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin backing_out = 1; */
+        if (message.backingOut)
+            Coin.internalBinaryWrite(message.backingOut, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_out = 2; */
+        if (message.lionOut)
+            Coin.internalBinaryWrite(message.lionOut, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin burn_fee = 3; */
+        if (message.burnFee)
+            Coin.internalBinaryWrite(message.burnFee, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateBurnBySwapOutResponse
+ */
+export const EstimateBurnBySwapOutResponse = new EstimateBurnBySwapOutResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateBuyBackingOutRequest$Type extends MessageType<EstimateBuyBackingOutRequest> {
+    constructor() {
+        super("merlion.maker.v1.EstimateBuyBackingOutRequest", [
+            { no: 1, name: "lion_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "backing_denom", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateBuyBackingOutRequest>): EstimateBuyBackingOutRequest {
+        const message = { backingDenom: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateBuyBackingOutRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateBuyBackingOutRequest): EstimateBuyBackingOutRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin lion_in */ 1:
+                    message.lionIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionIn);
+                    break;
+                case /* string backing_denom */ 2:
+                    message.backingDenom = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateBuyBackingOutRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin lion_in = 1; */
+        if (message.lionIn)
+            Coin.internalBinaryWrite(message.lionIn, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* string backing_denom = 2; */
+        if (message.backingDenom !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.backingDenom);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateBuyBackingOutRequest
+ */
+export const EstimateBuyBackingOutRequest = new EstimateBuyBackingOutRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateBuyBackingOutResponse$Type extends MessageType<EstimateBuyBackingOutResponse> {
+    constructor() {
+        super("merlion.maker.v1.EstimateBuyBackingOutResponse", [
+            { no: 1, name: "backing_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "buyback_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateBuyBackingOutResponse>): EstimateBuyBackingOutResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateBuyBackingOutResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateBuyBackingOutResponse): EstimateBuyBackingOutResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin backing_out */ 1:
+                    message.backingOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingOut);
+                    break;
+                case /* cosmos.base.v1beta1.Coin buyback_fee */ 2:
+                    message.buybackFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.buybackFee);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateBuyBackingOutResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin backing_out = 1; */
+        if (message.backingOut)
+            Coin.internalBinaryWrite(message.backingOut, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin buyback_fee = 2; */
+        if (message.buybackFee)
+            Coin.internalBinaryWrite(message.buybackFee, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateBuyBackingOutResponse
+ */
+export const EstimateBuyBackingOutResponse = new EstimateBuyBackingOutResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateSellBackingOutRequest$Type extends MessageType<EstimateSellBackingOutRequest> {
+    constructor() {
+        super("merlion.maker.v1.EstimateSellBackingOutRequest", [
+            { no: 1, name: "backing_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateSellBackingOutRequest>): EstimateSellBackingOutRequest {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateSellBackingOutRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateSellBackingOutRequest): EstimateSellBackingOutRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin backing_in */ 1:
+                    message.backingIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingIn);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateSellBackingOutRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin backing_in = 1; */
+        if (message.backingIn)
+            Coin.internalBinaryWrite(message.backingIn, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateSellBackingOutRequest
+ */
+export const EstimateSellBackingOutRequest = new EstimateSellBackingOutRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateSellBackingOutResponse$Type extends MessageType<EstimateSellBackingOutResponse> {
+    constructor() {
+        super("merlion.maker.v1.EstimateSellBackingOutResponse", [
+            { no: 1, name: "lion_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "sellback_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateSellBackingOutResponse>): EstimateSellBackingOutResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateSellBackingOutResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateSellBackingOutResponse): EstimateSellBackingOutResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin lion_out */ 1:
+                    message.lionOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionOut);
+                    break;
+                case /* cosmos.base.v1beta1.Coin sellback_fee */ 2:
+                    message.sellbackFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.sellbackFee);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateSellBackingOutResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin lion_out = 1; */
+        if (message.lionOut)
+            Coin.internalBinaryWrite(message.lionOut, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin sellback_fee = 2; */
+        if (message.sellbackFee)
+            Coin.internalBinaryWrite(message.sellbackFee, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateSellBackingOutResponse
+ */
+export const EstimateSellBackingOutResponse = new EstimateSellBackingOutResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateMintByCollateralInRequest$Type extends MessageType<EstimateMintByCollateralInRequest> {
+    constructor() {
+        super("merlion.maker.v1.EstimateMintByCollateralInRequest", [
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "mint_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 3, name: "collateral_denom", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "lion_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateMintByCollateralInRequest>): EstimateMintByCollateralInRequest {
+        const message = { sender: "", collateralDenom: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateMintByCollateralInRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateMintByCollateralInRequest): EstimateMintByCollateralInRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string sender */ 1:
+                    message.sender = reader.string();
+                    break;
+                case /* cosmos.base.v1beta1.Coin mint_out */ 2:
+                    message.mintOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintOut);
+                    break;
+                case /* string collateral_denom */ 3:
+                    message.collateralDenom = reader.string();
+                    break;
+                case /* cosmos.base.v1beta1.Coin lion_in_max */ 4:
+                    message.lionInMax = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionInMax);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateMintByCollateralInRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string sender = 1; */
+        if (message.sender !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.sender);
+        /* cosmos.base.v1beta1.Coin mint_out = 2; */
+        if (message.mintOut)
+            Coin.internalBinaryWrite(message.mintOut, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* string collateral_denom = 3; */
+        if (message.collateralDenom !== "")
+            writer.tag(3, WireType.LengthDelimited).string(message.collateralDenom);
+        /* cosmos.base.v1beta1.Coin lion_in_max = 4; */
+        if (message.lionInMax)
+            Coin.internalBinaryWrite(message.lionInMax, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateMintByCollateralInRequest
+ */
+export const EstimateMintByCollateralInRequest = new EstimateMintByCollateralInRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateMintByCollateralInResponse$Type extends MessageType<EstimateMintByCollateralInResponse> {
+    constructor() {
+        super("merlion.maker.v1.EstimateMintByCollateralInResponse", [
+            { no: 1, name: "lion_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "mint_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 3, name: "total_coll", kind: "message", T: () => TotalCollateral, options: { "gogoproto.nullable": false } },
+            { no: 4, name: "pool_coll", kind: "message", T: () => PoolCollateral, options: { "gogoproto.nullable": false } },
+            { no: 5, name: "acc_coll", kind: "message", T: () => AccountCollateral, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateMintByCollateralInResponse>): EstimateMintByCollateralInResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateMintByCollateralInResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateMintByCollateralInResponse): EstimateMintByCollateralInResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin lion_in */ 1:
+                    message.lionIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionIn);
+                    break;
+                case /* cosmos.base.v1beta1.Coin mint_fee */ 2:
+                    message.mintFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintFee);
+                    break;
+                case /* merlion.maker.v1.TotalCollateral total_coll */ 3:
+                    message.totalColl = TotalCollateral.internalBinaryRead(reader, reader.uint32(), options, message.totalColl);
+                    break;
+                case /* merlion.maker.v1.PoolCollateral pool_coll */ 4:
+                    message.poolColl = PoolCollateral.internalBinaryRead(reader, reader.uint32(), options, message.poolColl);
+                    break;
+                case /* merlion.maker.v1.AccountCollateral acc_coll */ 5:
+                    message.accColl = AccountCollateral.internalBinaryRead(reader, reader.uint32(), options, message.accColl);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateMintByCollateralInResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin lion_in = 1; */
+        if (message.lionIn)
+            Coin.internalBinaryWrite(message.lionIn, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin mint_fee = 2; */
+        if (message.mintFee)
+            Coin.internalBinaryWrite(message.mintFee, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* merlion.maker.v1.TotalCollateral total_coll = 3; */
+        if (message.totalColl)
+            TotalCollateral.internalBinaryWrite(message.totalColl, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* merlion.maker.v1.PoolCollateral pool_coll = 4; */
+        if (message.poolColl)
+            PoolCollateral.internalBinaryWrite(message.poolColl, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* merlion.maker.v1.AccountCollateral acc_coll = 5; */
+        if (message.accColl)
+            AccountCollateral.internalBinaryWrite(message.accColl, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateMintByCollateralInResponse
+ */
+export const EstimateMintByCollateralInResponse = new EstimateMintByCollateralInResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateBurnByCollateralInRequest$Type extends MessageType<EstimateBurnByCollateralInRequest> {
+    constructor() {
+        super("merlion.maker.v1.EstimateBurnByCollateralInRequest", [
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "collateral_denom", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "repay_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateBurnByCollateralInRequest>): EstimateBurnByCollateralInRequest {
+        const message = { sender: "", collateralDenom: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateBurnByCollateralInRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateBurnByCollateralInRequest): EstimateBurnByCollateralInRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string sender */ 1:
+                    message.sender = reader.string();
+                    break;
+                case /* string collateral_denom */ 2:
+                    message.collateralDenom = reader.string();
+                    break;
+                case /* cosmos.base.v1beta1.Coin repay_in_max */ 3:
+                    message.repayInMax = Coin.internalBinaryRead(reader, reader.uint32(), options, message.repayInMax);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateBurnByCollateralInRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string sender = 1; */
+        if (message.sender !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.sender);
+        /* string collateral_denom = 2; */
+        if (message.collateralDenom !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.collateralDenom);
+        /* cosmos.base.v1beta1.Coin repay_in_max = 3; */
+        if (message.repayInMax)
+            Coin.internalBinaryWrite(message.repayInMax, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateBurnByCollateralInRequest
+ */
+export const EstimateBurnByCollateralInRequest = new EstimateBurnByCollateralInRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class EstimateBurnByCollateralInResponse$Type extends MessageType<EstimateBurnByCollateralInResponse> {
+    constructor() {
+        super("merlion.maker.v1.EstimateBurnByCollateralInResponse", [
+            { no: 1, name: "repay_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 2, name: "interest_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 3, name: "total_coll", kind: "message", T: () => TotalCollateral, options: { "gogoproto.nullable": false } },
+            { no: 4, name: "pool_coll", kind: "message", T: () => PoolCollateral, options: { "gogoproto.nullable": false } },
+            { no: 5, name: "acc_coll", kind: "message", T: () => AccountCollateral, options: { "gogoproto.nullable": false } }
+        ]);
+    }
+    create(value?: PartialMessage<EstimateBurnByCollateralInResponse>): EstimateBurnByCollateralInResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<EstimateBurnByCollateralInResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: EstimateBurnByCollateralInResponse): EstimateBurnByCollateralInResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.base.v1beta1.Coin repay_in */ 1:
+                    message.repayIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.repayIn);
+                    break;
+                case /* cosmos.base.v1beta1.Coin interest_fee */ 2:
+                    message.interestFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.interestFee);
+                    break;
+                case /* merlion.maker.v1.TotalCollateral total_coll */ 3:
+                    message.totalColl = TotalCollateral.internalBinaryRead(reader, reader.uint32(), options, message.totalColl);
+                    break;
+                case /* merlion.maker.v1.PoolCollateral pool_coll */ 4:
+                    message.poolColl = PoolCollateral.internalBinaryRead(reader, reader.uint32(), options, message.poolColl);
+                    break;
+                case /* merlion.maker.v1.AccountCollateral acc_coll */ 5:
+                    message.accColl = AccountCollateral.internalBinaryRead(reader, reader.uint32(), options, message.accColl);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: EstimateBurnByCollateralInResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.base.v1beta1.Coin repay_in = 1; */
+        if (message.repayIn)
+            Coin.internalBinaryWrite(message.repayIn, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin interest_fee = 2; */
+        if (message.interestFee)
+            Coin.internalBinaryWrite(message.interestFee, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* merlion.maker.v1.TotalCollateral total_coll = 3; */
+        if (message.totalColl)
+            TotalCollateral.internalBinaryWrite(message.totalColl, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* merlion.maker.v1.PoolCollateral pool_coll = 4; */
+        if (message.poolColl)
+            PoolCollateral.internalBinaryWrite(message.poolColl, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* merlion.maker.v1.AccountCollateral acc_coll = 5; */
+        if (message.accColl)
+            AccountCollateral.internalBinaryWrite(message.accColl, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.maker.v1.EstimateBurnByCollateralInResponse
+ */
+export const EstimateBurnByCollateralInResponse = new EstimateBurnByCollateralInResponse$Type();
 /**
  * @generated ServiceType for protobuf service merlion.maker.v1.Query
  */
@@ -1093,6 +2175,13 @@ export const Query = new ServiceType("merlion.maker.v1.Query", [
     { name: "CollateralOfAccount", options: { "google.api.http": { get: "/merlion/maker/v1/collateral_account" } }, I: QueryCollateralOfAccountRequest, O: QueryCollateralOfAccountResponse },
     { name: "TotalBacking", options: { "google.api.http": { get: "/merlion/maker/v1/total_backing" } }, I: QueryTotalBackingRequest, O: QueryTotalBackingResponse },
     { name: "TotalCollateral", options: { "google.api.http": { get: "/merlion/maker/v1/total_collateral" } }, I: QueryTotalCollateralRequest, O: QueryTotalCollateralResponse },
-    { name: "CollateralRatio", options: { "google.api.http": { get: "/merlion/maker/v1/collateral_ratio" } }, I: QueryCollateralRatioRequest, O: QueryCollateralRatioResponse },
-    { name: "Params", options: { "google.api.http": { get: "/merlion/maker/v1/params" } }, I: QueryParamsRequest, O: QueryParamsResponse }
+    { name: "BackingRatio", options: { "google.api.http": { get: "/merlion/maker/v1/backing_ratio" } }, I: QueryBackingRatioRequest, O: QueryBackingRatioResponse },
+    { name: "Params", options: { "google.api.http": { get: "/merlion/maker/v1/params" } }, I: QueryParamsRequest, O: QueryParamsResponse },
+    { name: "EstimateMintBySwapIn", options: { "google.api.http": { get: "/merlion/maker/v1/estimate_mint_by_swap_in" } }, I: EstimateMintBySwapInRequest, O: EstimateMintBySwapInResponse },
+    { name: "EstimateMintBySwapOut", options: { "google.api.http": { get: "/merlion/maker/v1/estimate_mint_by_swap_out" } }, I: EstimateMintBySwapOutRequest, O: EstimateMintBySwapOutResponse },
+    { name: "EstimateBurnBySwapOut", options: { "google.api.http": { get: "/merlion/maker/v1/estimate_burn_by_swap_out" } }, I: EstimateBurnBySwapOutRequest, O: EstimateBurnBySwapOutResponse },
+    { name: "EstimateBuyBackingOut", options: { "google.api.http": { get: "/merlion/maker/v1/estimate_buy_backing_out" } }, I: EstimateBuyBackingOutRequest, O: EstimateBuyBackingOutResponse },
+    { name: "EstimateSellBackingOut", options: { "google.api.http": { get: "/merlion/maker/v1/estimate_sell_backing_out" } }, I: EstimateSellBackingOutRequest, O: EstimateSellBackingOutResponse },
+    { name: "EstimateMintByCollateralIn", options: { "google.api.http": { get: "/merlion/maker/v1/estimate_mint_by_collateral_in" } }, I: EstimateMintByCollateralInRequest, O: EstimateMintByCollateralInResponse },
+    { name: "EstimateBurnByCollateralIn", options: { "google.api.http": { get: "/merlion/maker/v1/estimate_burn_by_collateral_in" } }, I: EstimateBurnByCollateralInRequest, O: EstimateBurnByCollateralInResponse }
 ]);
