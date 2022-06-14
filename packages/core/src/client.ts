@@ -91,6 +91,7 @@ export class MerlionClient {
     this.chainId = options.chainId
     this.address = options.address ?? ''
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const doMsg = (msgClass: any): SingleMsgTx<any> => {
       const func = (params: MsgParams, options?: TxOptions) => {
         return this.tx.broadcast([new msgClass(params)], options)
@@ -151,31 +152,27 @@ export class MerlionClient {
 
   private async prepareAndSign(
     messages: Msg[],
-    {
-      gasLimit,
-      gasPriceInFeeDenom,
-      feeDenom,
-      memo,
-      explicitSignerData,
-    }: TxOptions = {
-      gasLimit: 500_000, // TODO
-      gasPriceInFeeDenom: 0.25, // TODO
-      feeDenom: 'fur',
-      memo: '',
-    },
+    txOptions: TxOptions = {},
   ): Promise<Uint8Array> {
+    const {
+      gasLimit = 500_000, // TODO
+      gasPriceInFeeDenom = 0.25, // TODO
+      feeDenom = 'alion', // TODO
+      memo = '',
+      explicitSignerData,
+    } = txOptions
     const txRaw = await this.sign(
       messages,
       {
-        gas: String(gasLimit!),
+        gas: String(gasLimit),
         amount: [
           {
-            amount: String(gasToFee(gasLimit!, gasPriceInFeeDenom!)),
-            denom: feeDenom!,
+            amount: String(gasToFee(gasLimit, gasPriceInFeeDenom)),
+            denom: feeDenom,
           },
         ],
       },
-      memo!,
+      memo,
       explicitSignerData,
     )
 
@@ -395,12 +392,12 @@ export class MerlionClient {
         txBytes: tx,
         mode: 2, // BroadcastModePB.SYNC
       })
-      if (txResponse?.code) {
+      if (isUndefined(txResponse) || txResponse.code) {
         throw new Error(
           `Broadcasting transaction failed with code ${txResponse?.code} (codespace: ${txResponse?.codespace}). Log: ${txResponse?.rawLog}`,
         )
       }
-      txHash = txResponse!.txhash
+      txHash = txResponse.txhash
     } else if (mode === BroadcastMode.Async) {
       const {
         response: { txResponse },
@@ -408,7 +405,8 @@ export class MerlionClient {
         txBytes: tx,
         mode: 3, // BroadcastModePB.ASYNC,
       })
-      txHash = txResponse!.txhash
+      if (isUndefined(txResponse)) throw new Error() // TODO
+      txHash = txResponse.txhash
     } else {
       throw new Error(
         `Unknown broadcast mode "${String(mode)}", must be either "${String(
@@ -509,16 +507,20 @@ export class MerlionClient {
         const txMsgData = TxMsgData.fromBinary(fromHex(tx.data))
         const data = new Array<Uint8Array>(txMsgData.data.length)
 
+        if (isUndefined(tx.tx)) throw new Error('') // TODO
+
         // Decode input messages
         const decodedTx = (
           await import('@merjs/proto/cosmos/tx/v1beta1/tx')
-        ).Tx.fromBinary(tx.tx!.value)
-        for (let i = 0; i < decodedTx.body!.messages.length; i++) {
-          const { typeUrl, value: msgBytes } = decodedTx.body!.messages[i]
+        ).Tx.fromBinary(tx.tx.value)
+
+        if (isUndefined(decodedTx.body)) throw new Error('') // TODO
+        for (let i = 0; i < decodedTx.body.messages.length; i++) {
+          const { typeUrl, value: msgBytes } = decodedTx.body.messages[i]
           const msgDecoder = this.msgDecoderRegistry.get(typeUrl.slice(1))
           if (!msgDecoder) continue
 
-          decodedTx.body!.messages[i] = {
+          decodedTx.body.messages[i] = {
             typeUrl,
             value: msgDecoder.fromBinary(msgBytes),
           }
@@ -529,7 +531,7 @@ export class MerlionClient {
           transactionHash: tx.txhash,
           code: tx.code,
           tx: decodedTx,
-          txBytes: tx.tx!.value,
+          txBytes: tx.tx.value,
           rawLog,
           jsonLog,
           arrayLog,
@@ -631,4 +633,9 @@ function makeSignDocAmino(
 
 function gasToFee(gasLimit: number, gasPrice: number): number {
   return Math.ceil(gasLimit * gasPrice)
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function isUndefined(value: any): value is undefined {
+  return value === undefined
 }
