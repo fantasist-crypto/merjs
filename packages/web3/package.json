@@ -1,0 +1,28 @@
+{
+  "name": "@merjs/web3",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "src/",
+    "dist/"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc -b",
+    "lint": "eslint src/**/*.ts",
+    "clean": "rimraf ./dist"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.14"
+  }
+}

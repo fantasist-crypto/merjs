@@ -80,9 +80,6 @@ export class MsgCreateValidator implements Msg {
   async toProto(): Promise<ProtoMsg> {
     const { Any } = await import('@merjs/proto/google/protobuf/any')
     const { PubKey } = await import('@merjs/proto/cosmos/crypto/ed25519/keys')
-    const { MsgCreateValidator } = await import(
-      '@merjs/proto/cosmos/staking/v1beta1/tx'
-    )
 
     const msgContent = {
       description: this.description,
