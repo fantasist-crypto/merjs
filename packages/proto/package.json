@@ -1,6 +1,6 @@
 {
   "name": "@merjs/proto",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "files": [
     "src/",
     "cosmos/",
@@ -20,8 +20,7 @@
   },
   "scripts": {
     "gen": "protoc --ts_out src --ts_opt long_type_string --proto_path $(PWD)/proto $(find $(PWD)/proto -iname '*.proto')",
-    "build": "node scripts/rm.mjs && rimraf ./dist && tsc -b && node scripts/cp.mjs",
-    "postpublish": "node scripts/rm.mjs"
+    "build": "node scripts/rm.mjs && tsc -b"
   },
   "dependencies": {
     "@protobuf-ts/runtime": "^2.5.0",
