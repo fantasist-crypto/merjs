@@ -1,7 +1,0 @@
-syntax = "proto3";
-package merlion.gauge.v1;
-
-option go_package = "github.com/merlion-zone/merlion/x/gauge/types";
-
-// Msg defines the Msg service.
-service Msg {}
