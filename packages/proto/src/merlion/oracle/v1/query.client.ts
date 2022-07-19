@@ -18,6 +18,8 @@ import type { QueryMissCounterResponse } from "./query";
 import type { QueryMissCounterRequest } from "./query";
 import type { QueryFeederDelegationResponse } from "./query";
 import type { QueryFeederDelegationRequest } from "./query";
+import type { QueryTargetsResponse } from "./query";
+import type { QueryTargetsRequest } from "./query";
 import type { QueryVoteTargetsResponse } from "./query";
 import type { QueryVoteTargetsRequest } from "./query";
 import type { QueryActivesResponse } from "./query";
@@ -59,6 +61,12 @@ export interface IQueryClient {
      * @generated from protobuf rpc: VoteTargets(merlion.oracle.v1.QueryVoteTargetsRequest) returns (merlion.oracle.v1.QueryVoteTargetsResponse);
      */
     voteTargets(input: QueryVoteTargetsRequest, options?: RpcOptions): UnaryCall<QueryVoteTargetsRequest, QueryVoteTargetsResponse>;
+    /**
+     * Targets returns all target denoms (including vote targets).
+     *
+     * @generated from protobuf rpc: Targets(merlion.oracle.v1.QueryTargetsRequest) returns (merlion.oracle.v1.QueryTargetsResponse);
+     */
+    targets(input: QueryTargetsRequest, options?: RpcOptions): UnaryCall<QueryTargetsRequest, QueryTargetsResponse>;
     /**
      * FeederDelegation returns feeder delegation of a validator.
      *
@@ -150,12 +158,21 @@ export class QueryClient implements IQueryClient, ServiceInfo {
         return stackIntercept<QueryVoteTargetsRequest, QueryVoteTargetsResponse>("unary", this._transport, method, opt, input);
     }
     /**
+     * Targets returns all target denoms (including vote targets).
+     *
+     * @generated from protobuf rpc: Targets(merlion.oracle.v1.QueryTargetsRequest) returns (merlion.oracle.v1.QueryTargetsResponse);
+     */
+    targets(input: QueryTargetsRequest, options?: RpcOptions): UnaryCall<QueryTargetsRequest, QueryTargetsResponse> {
+        const method = this.methods[4], opt = this._transport.mergeOptions(options);
+        return stackIntercept<QueryTargetsRequest, QueryTargetsResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
      * FeederDelegation returns feeder delegation of a validator.
      *
      * @generated from protobuf rpc: FeederDelegation(merlion.oracle.v1.QueryFeederDelegationRequest) returns (merlion.oracle.v1.QueryFeederDelegationResponse);
      */
     feederDelegation(input: QueryFeederDelegationRequest, options?: RpcOptions): UnaryCall<QueryFeederDelegationRequest, QueryFeederDelegationResponse> {
-        const method = this.methods[4], opt = this._transport.mergeOptions(options);
+        const method = this.methods[5], opt = this._transport.mergeOptions(options);
         return stackIntercept<QueryFeederDelegationRequest, QueryFeederDelegationResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -164,7 +181,7 @@ export class QueryClient implements IQueryClient, ServiceInfo {
      * @generated from protobuf rpc: MissCounter(merlion.oracle.v1.QueryMissCounterRequest) returns (merlion.oracle.v1.QueryMissCounterResponse);
      */
     missCounter(input: QueryMissCounterRequest, options?: RpcOptions): UnaryCall<QueryMissCounterRequest, QueryMissCounterResponse> {
-        const method = this.methods[5], opt = this._transport.mergeOptions(options);
+        const method = this.methods[6], opt = this._transport.mergeOptions(options);
         return stackIntercept<QueryMissCounterRequest, QueryMissCounterResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -173,7 +190,7 @@ export class QueryClient implements IQueryClient, ServiceInfo {
      * @generated from protobuf rpc: AggregatePrevote(merlion.oracle.v1.QueryAggregatePrevoteRequest) returns (merlion.oracle.v1.QueryAggregatePrevoteResponse);
      */
     aggregatePrevote(input: QueryAggregatePrevoteRequest, options?: RpcOptions): UnaryCall<QueryAggregatePrevoteRequest, QueryAggregatePrevoteResponse> {
-        const method = this.methods[6], opt = this._transport.mergeOptions(options);
+        const method = this.methods[7], opt = this._transport.mergeOptions(options);
         return stackIntercept<QueryAggregatePrevoteRequest, QueryAggregatePrevoteResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -182,7 +199,7 @@ export class QueryClient implements IQueryClient, ServiceInfo {
      * @generated from protobuf rpc: AggregatePrevotes(merlion.oracle.v1.QueryAggregatePrevotesRequest) returns (merlion.oracle.v1.QueryAggregatePrevotesResponse);
      */
     aggregatePrevotes(input: QueryAggregatePrevotesRequest, options?: RpcOptions): UnaryCall<QueryAggregatePrevotesRequest, QueryAggregatePrevotesResponse> {
-        const method = this.methods[7], opt = this._transport.mergeOptions(options);
+        const method = this.methods[8], opt = this._transport.mergeOptions(options);
         return stackIntercept<QueryAggregatePrevotesRequest, QueryAggregatePrevotesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -191,7 +208,7 @@ export class QueryClient implements IQueryClient, ServiceInfo {
      * @generated from protobuf rpc: AggregateVote(merlion.oracle.v1.QueryAggregateVoteRequest) returns (merlion.oracle.v1.QueryAggregateVoteResponse);
      */
     aggregateVote(input: QueryAggregateVoteRequest, options?: RpcOptions): UnaryCall<QueryAggregateVoteRequest, QueryAggregateVoteResponse> {
-        const method = this.methods[8], opt = this._transport.mergeOptions(options);
+        const method = this.methods[9], opt = this._transport.mergeOptions(options);
         return stackIntercept<QueryAggregateVoteRequest, QueryAggregateVoteResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -200,7 +217,7 @@ export class QueryClient implements IQueryClient, ServiceInfo {
      * @generated from protobuf rpc: AggregateVotes(merlion.oracle.v1.QueryAggregateVotesRequest) returns (merlion.oracle.v1.QueryAggregateVotesResponse);
      */
     aggregateVotes(input: QueryAggregateVotesRequest, options?: RpcOptions): UnaryCall<QueryAggregateVotesRequest, QueryAggregateVotesResponse> {
-        const method = this.methods[9], opt = this._transport.mergeOptions(options);
+        const method = this.methods[10], opt = this._transport.mergeOptions(options);
         return stackIntercept<QueryAggregateVotesRequest, QueryAggregateVotesResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -209,7 +226,7 @@ export class QueryClient implements IQueryClient, ServiceInfo {
      * @generated from protobuf rpc: Params(merlion.oracle.v1.QueryParamsRequest) returns (merlion.oracle.v1.QueryParamsResponse);
      */
     params(input: QueryParamsRequest, options?: RpcOptions): UnaryCall<QueryParamsRequest, QueryParamsResponse> {
-        const method = this.methods[10], opt = this._transport.mergeOptions(options);
+        const method = this.methods[11], opt = this._transport.mergeOptions(options);
         return stackIntercept<QueryParamsRequest, QueryParamsResponse>("unary", this._transport, method, opt, input);
     }
 }

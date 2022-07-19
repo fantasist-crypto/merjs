@@ -43,9 +43,9 @@ export interface MsgVeDelegateResponse {
 class MsgVeDelegate$Type extends MessageType<MsgVeDelegate> {
     constructor() {
         super("merlion.staking.v1.MsgVeDelegate", [
-            { no: 1, name: "delegator_address", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "validator_address", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "ve_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 1, name: "delegator_address", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "delegator_address" } },
+            { no: 2, name: "validator_address", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "validator_address" } },
+            { no: 3, name: "ve_id", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "ve_id" } },
             { no: 4, name: "amount", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }

@@ -100,9 +100,9 @@ export interface MsgDelegateFeedConsentResponse {
 class MsgAggregateExchangeRatePrevote$Type extends MessageType<MsgAggregateExchangeRatePrevote> {
     constructor() {
         super("merlion.oracle.v1.MsgAggregateExchangeRatePrevote", [
-            { no: 1, name: "hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "feeder", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "validator", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "hash", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "hash" } },
+            { no: 2, name: "feeder", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "feeder" } },
+            { no: 3, name: "validator", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "validator" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }
     create(value?: PartialMessage<MsgAggregateExchangeRatePrevote>): MsgAggregateExchangeRatePrevote {
@@ -187,10 +187,10 @@ export const MsgAggregateExchangeRatePrevoteResponse = new MsgAggregateExchangeR
 class MsgAggregateExchangeRateVote$Type extends MessageType<MsgAggregateExchangeRateVote> {
     constructor() {
         super("merlion.oracle.v1.MsgAggregateExchangeRateVote", [
-            { no: 1, name: "salt", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "exchange_rates", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "feeder", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "validator", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "salt", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "salt" } },
+            { no: 2, name: "exchange_rates", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "exchange_rates" } },
+            { no: 3, name: "feeder", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "feeder" } },
+            { no: 4, name: "validator", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "validator" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }
     create(value?: PartialMessage<MsgAggregateExchangeRateVote>): MsgAggregateExchangeRateVote {
@@ -281,8 +281,8 @@ export const MsgAggregateExchangeRateVoteResponse = new MsgAggregateExchangeRate
 class MsgDelegateFeedConsent$Type extends MessageType<MsgDelegateFeedConsent> {
     constructor() {
         super("merlion.oracle.v1.MsgDelegateFeedConsent", [
-            { no: 1, name: "operator", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "delegate", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "operator", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "operator" } },
+            { no: 2, name: "delegate", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "delegate" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }
     create(value?: PartialMessage<MsgDelegateFeedConsent>): MsgDelegateFeedConsent {

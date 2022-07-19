@@ -61,11 +61,11 @@ export interface BackingRiskParams {
      */
     buybackFee: string;
     /**
-     * recollateralize fee rate
+     * reback fee rate
      *
-     * @generated from protobuf field: string recollateralize_fee = 8;
+     * @generated from protobuf field: string reback_fee = 8;
      */
-    recollateralizeFee: string;
+    rebackFee: string;
 }
 /**
  * CollateralRiskParams represents an object of collateral risk parameters.
@@ -86,13 +86,13 @@ export interface CollateralRiskParams {
      */
     enabled: boolean;
     /**
-     * maximum total collateral amount
+     * maximum total collateral amount; empty means no limit
      *
      * @generated from protobuf field: string max_collateral = 3;
      */
     maxCollateral: string;
     /**
-     * maximum total mintable Mer amount
+     * maximum total mintable Mer amount; empty means no limit
      *
      * @generated from protobuf field: string max_mer_mint = 4;
      */
@@ -118,7 +118,7 @@ export interface CollateralRiskParams {
      */
     basicLoanToValue: string;
     /**
-     * catalytic ratio of burned Lion to minted stablecoins, to maximize the LTV
+     * catalytic ratio of collateralized Lion to asset, to maximize the LTV
      * in [basic-LTV, LTV]
      *
      * @generated from protobuf field: string catalytic_lion_ratio = 8;
@@ -327,15 +327,21 @@ export interface BatchSetCollateralRiskParamsProposal {
  */
 export interface TotalBacking {
     /**
-     * total minted mer
+     * total backing value in uUSD
      *
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin mer_minted = 1;
+     * @generated from protobuf field: string backing_value = 1;
+     */
+    backingValue: string;
+    /**
+     * total minted mer; negative value means burned mer
+     *
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mer_minted = 2;
      */
     merMinted?: Coin;
     /**
-     * total burned lion
+     * total burned lion; negative value means minted lion
      *
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_burned = 2;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_burned = 3;
      */
     lionBurned?: Coin;
 }
@@ -344,7 +350,7 @@ export interface TotalBacking {
  */
 export interface PoolBacking {
     /**
-     * total minted mer
+     * total minted mer; negative value means burned mer
      *
      * @generated from protobuf field: cosmos.base.v1beta1.Coin mer_minted = 1;
      */
@@ -356,7 +362,7 @@ export interface PoolBacking {
      */
     backing?: Coin;
     /**
-     * total burned lion
+     * total burned lion; negative value means minted lion
      *
      * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_burned = 3;
      */
@@ -379,17 +385,11 @@ export interface TotalCollateral {
      */
     merDebt?: Coin;
     /**
-     * total minted merl by burning lion
+     * total collateralized lion
      *
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin mer_by_lion = 2;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_collateralized = 2;
      */
-    merByLion?: Coin;
-    /**
-     * total burned lion
-     *
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_burned = 3;
-     */
-    lionBurned?: Coin;
+    lionCollateralized?: Coin;
 }
 /**
  * @generated from protobuf message merlion.maker.v1.PoolCollateral
@@ -409,17 +409,11 @@ export interface PoolCollateral {
      */
     merDebt?: Coin;
     /**
-     * total minted merl by burning lion
+     * total collateralized lion
      *
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin mer_by_lion = 3;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_collateralized = 3;
      */
-    merByLion?: Coin;
-    /**
-     * total burned lion
-     *
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_burned = 4;
-     */
-    lionBurned?: Coin;
+    lionCollateralized?: Coin;
 }
 /**
  * @generated from protobuf message merlion.maker.v1.AccountCollateral
@@ -444,27 +438,21 @@ export interface AccountCollateral {
      */
     merDebt?: Coin;
     /**
-     * minted mer by burning lion
+     * total collateralized lion
      *
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin mer_by_lion = 4;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_collateralized = 4;
      */
-    merByLion?: Coin;
+    lionCollateralized?: Coin;
     /**
-     * total burned lion
+     * remaining interest debt at last settlement
      *
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_burned = 5;
-     */
-    lionBurned?: Coin;
-    /**
-     * remaining interest debt after last settlement
-     *
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin last_interest = 6;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin last_interest = 5;
      */
     lastInterest?: Coin;
     /**
      * the block of last settlement
      *
-     * @generated from protobuf field: int64 last_settlement_block = 7;
+     * @generated from protobuf field: int64 last_settlement_block = 6;
      */
     lastSettlementBlock: string;
 }
@@ -479,11 +467,11 @@ class BackingRiskParams$Type extends MessageType<BackingRiskParams> {
             { no: 5, name: "mint_fee", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec" } },
             { no: 6, name: "burn_fee", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec" } },
             { no: 7, name: "buyback_fee", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec" } },
-            { no: 8, name: "recollateralize_fee", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec" } }
+            { no: 8, name: "reback_fee", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec" } }
         ], { "gogoproto.equal": false });
     }
     create(value?: PartialMessage<BackingRiskParams>): BackingRiskParams {
-        const message = { backingDenom: "", enabled: false, maxBacking: "", maxMerMint: "", mintFee: "", burnFee: "", buybackFee: "", recollateralizeFee: "" };
+        const message = { backingDenom: "", enabled: false, maxBacking: "", maxMerMint: "", mintFee: "", burnFee: "", buybackFee: "", rebackFee: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<BackingRiskParams>(this, message, value);
@@ -515,8 +503,8 @@ class BackingRiskParams$Type extends MessageType<BackingRiskParams> {
                 case /* string buyback_fee */ 7:
                     message.buybackFee = reader.string();
                     break;
-                case /* string recollateralize_fee */ 8:
-                    message.recollateralizeFee = reader.string();
+                case /* string reback_fee */ 8:
+                    message.rebackFee = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -551,9 +539,9 @@ class BackingRiskParams$Type extends MessageType<BackingRiskParams> {
         /* string buyback_fee = 7; */
         if (message.buybackFee !== "")
             writer.tag(7, WireType.LengthDelimited).string(message.buybackFee);
-        /* string recollateralize_fee = 8; */
-        if (message.recollateralizeFee !== "")
-            writer.tag(8, WireType.LengthDelimited).string(message.recollateralizeFee);
+        /* string reback_fee = 8; */
+        if (message.rebackFee !== "")
+            writer.tag(8, WireType.LengthDelimited).string(message.rebackFee);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1145,12 +1133,13 @@ export const BatchSetCollateralRiskParamsProposal = new BatchSetCollateralRiskPa
 class TotalBacking$Type extends MessageType<TotalBacking> {
     constructor() {
         super("merlion.maker.v1.TotalBacking", [
-            { no: 1, name: "mer_minted", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
-            { no: 2, name: "lion_burned", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+            { no: 1, name: "backing_value", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Int" } },
+            { no: 2, name: "mer_minted", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 3, name: "lion_burned", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
         ], { "gogoproto.equal": false });
     }
     create(value?: PartialMessage<TotalBacking>): TotalBacking {
-        const message = {};
+        const message = { backingValue: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<TotalBacking>(this, message, value);
@@ -1161,10 +1150,13 @@ class TotalBacking$Type extends MessageType<TotalBacking> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* cosmos.base.v1beta1.Coin mer_minted */ 1:
+                case /* string backing_value */ 1:
+                    message.backingValue = reader.string();
+                    break;
+                case /* cosmos.base.v1beta1.Coin mer_minted */ 2:
                     message.merMinted = Coin.internalBinaryRead(reader, reader.uint32(), options, message.merMinted);
                     break;
-                case /* cosmos.base.v1beta1.Coin lion_burned */ 2:
+                case /* cosmos.base.v1beta1.Coin lion_burned */ 3:
                     message.lionBurned = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionBurned);
                     break;
                 default:
@@ -1179,12 +1171,15 @@ class TotalBacking$Type extends MessageType<TotalBacking> {
         return message;
     }
     internalBinaryWrite(message: TotalBacking, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* cosmos.base.v1beta1.Coin mer_minted = 1; */
+        /* string backing_value = 1; */
+        if (message.backingValue !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.backingValue);
+        /* cosmos.base.v1beta1.Coin mer_minted = 2; */
         if (message.merMinted)
-            Coin.internalBinaryWrite(message.merMinted, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin lion_burned = 2; */
+            Coin.internalBinaryWrite(message.merMinted, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_burned = 3; */
         if (message.lionBurned)
-            Coin.internalBinaryWrite(message.lionBurned, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+            Coin.internalBinaryWrite(message.lionBurned, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1287,8 +1282,7 @@ class TotalCollateral$Type extends MessageType<TotalCollateral> {
     constructor() {
         super("merlion.maker.v1.TotalCollateral", [
             { no: 1, name: "mer_debt", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
-            { no: 2, name: "mer_by_lion", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
-            { no: 3, name: "lion_burned", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+            { no: 2, name: "lion_collateralized", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
         ], { "gogoproto.equal": false });
     }
     create(value?: PartialMessage<TotalCollateral>): TotalCollateral {
@@ -1306,11 +1300,8 @@ class TotalCollateral$Type extends MessageType<TotalCollateral> {
                 case /* cosmos.base.v1beta1.Coin mer_debt */ 1:
                     message.merDebt = Coin.internalBinaryRead(reader, reader.uint32(), options, message.merDebt);
                     break;
-                case /* cosmos.base.v1beta1.Coin mer_by_lion */ 2:
-                    message.merByLion = Coin.internalBinaryRead(reader, reader.uint32(), options, message.merByLion);
-                    break;
-                case /* cosmos.base.v1beta1.Coin lion_burned */ 3:
-                    message.lionBurned = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionBurned);
+                case /* cosmos.base.v1beta1.Coin lion_collateralized */ 2:
+                    message.lionCollateralized = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionCollateralized);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1327,12 +1318,9 @@ class TotalCollateral$Type extends MessageType<TotalCollateral> {
         /* cosmos.base.v1beta1.Coin mer_debt = 1; */
         if (message.merDebt)
             Coin.internalBinaryWrite(message.merDebt, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin mer_by_lion = 2; */
-        if (message.merByLion)
-            Coin.internalBinaryWrite(message.merByLion, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin lion_burned = 3; */
-        if (message.lionBurned)
-            Coin.internalBinaryWrite(message.lionBurned, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_collateralized = 2; */
+        if (message.lionCollateralized)
+            Coin.internalBinaryWrite(message.lionCollateralized, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1349,8 +1337,7 @@ class PoolCollateral$Type extends MessageType<PoolCollateral> {
         super("merlion.maker.v1.PoolCollateral", [
             { no: 1, name: "collateral", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
             { no: 2, name: "mer_debt", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
-            { no: 3, name: "mer_by_lion", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
-            { no: 4, name: "lion_burned", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
+            { no: 3, name: "lion_collateralized", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } }
         ], { "gogoproto.equal": false });
     }
     create(value?: PartialMessage<PoolCollateral>): PoolCollateral {
@@ -1371,11 +1358,8 @@ class PoolCollateral$Type extends MessageType<PoolCollateral> {
                 case /* cosmos.base.v1beta1.Coin mer_debt */ 2:
                     message.merDebt = Coin.internalBinaryRead(reader, reader.uint32(), options, message.merDebt);
                     break;
-                case /* cosmos.base.v1beta1.Coin mer_by_lion */ 3:
-                    message.merByLion = Coin.internalBinaryRead(reader, reader.uint32(), options, message.merByLion);
-                    break;
-                case /* cosmos.base.v1beta1.Coin lion_burned */ 4:
-                    message.lionBurned = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionBurned);
+                case /* cosmos.base.v1beta1.Coin lion_collateralized */ 3:
+                    message.lionCollateralized = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionCollateralized);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1395,12 +1379,9 @@ class PoolCollateral$Type extends MessageType<PoolCollateral> {
         /* cosmos.base.v1beta1.Coin mer_debt = 2; */
         if (message.merDebt)
             Coin.internalBinaryWrite(message.merDebt, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin mer_by_lion = 3; */
-        if (message.merByLion)
-            Coin.internalBinaryWrite(message.merByLion, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin lion_burned = 4; */
-        if (message.lionBurned)
-            Coin.internalBinaryWrite(message.lionBurned, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_collateralized = 3; */
+        if (message.lionCollateralized)
+            Coin.internalBinaryWrite(message.lionCollateralized, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1418,10 +1399,9 @@ class AccountCollateral$Type extends MessageType<AccountCollateral> {
             { no: 1, name: "account", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "collateral", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
             { no: 3, name: "mer_debt", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
-            { no: 4, name: "mer_by_lion", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
-            { no: 5, name: "lion_burned", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
-            { no: 6, name: "last_interest", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
-            { no: 7, name: "last_settlement_block", kind: "scalar", T: 3 /*ScalarType.INT64*/ }
+            { no: 4, name: "lion_collateralized", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 5, name: "last_interest", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false } },
+            { no: 6, name: "last_settlement_block", kind: "scalar", T: 3 /*ScalarType.INT64*/ }
         ], { "gogoproto.equal": false });
     }
     create(value?: PartialMessage<AccountCollateral>): AccountCollateral {
@@ -1445,16 +1425,13 @@ class AccountCollateral$Type extends MessageType<AccountCollateral> {
                 case /* cosmos.base.v1beta1.Coin mer_debt */ 3:
                     message.merDebt = Coin.internalBinaryRead(reader, reader.uint32(), options, message.merDebt);
                     break;
-                case /* cosmos.base.v1beta1.Coin mer_by_lion */ 4:
-                    message.merByLion = Coin.internalBinaryRead(reader, reader.uint32(), options, message.merByLion);
+                case /* cosmos.base.v1beta1.Coin lion_collateralized */ 4:
+                    message.lionCollateralized = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionCollateralized);
                     break;
-                case /* cosmos.base.v1beta1.Coin lion_burned */ 5:
-                    message.lionBurned = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionBurned);
-                    break;
-                case /* cosmos.base.v1beta1.Coin last_interest */ 6:
+                case /* cosmos.base.v1beta1.Coin last_interest */ 5:
                     message.lastInterest = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lastInterest);
                     break;
-                case /* int64 last_settlement_block */ 7:
+                case /* int64 last_settlement_block */ 6:
                     message.lastSettlementBlock = reader.int64().toString();
                     break;
                 default:
@@ -1478,18 +1455,15 @@ class AccountCollateral$Type extends MessageType<AccountCollateral> {
         /* cosmos.base.v1beta1.Coin mer_debt = 3; */
         if (message.merDebt)
             Coin.internalBinaryWrite(message.merDebt, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin mer_by_lion = 4; */
-        if (message.merByLion)
-            Coin.internalBinaryWrite(message.merByLion, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin lion_burned = 5; */
-        if (message.lionBurned)
-            Coin.internalBinaryWrite(message.lionBurned, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin last_interest = 6; */
+        /* cosmos.base.v1beta1.Coin lion_collateralized = 4; */
+        if (message.lionCollateralized)
+            Coin.internalBinaryWrite(message.lionCollateralized, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin last_interest = 5; */
         if (message.lastInterest)
-            Coin.internalBinaryWrite(message.lastInterest, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
-        /* int64 last_settlement_block = 7; */
+            Coin.internalBinaryWrite(message.lastInterest, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        /* int64 last_settlement_block = 6; */
         if (message.lastSettlementBlock !== "0")
-            writer.tag(7, WireType.Varint).int64(message.lastSettlementBlock);
+            writer.tag(6, WireType.Varint).int64(message.lastSettlementBlock);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

@@ -34,32 +34,17 @@ export interface Params {
      */
     rewardDistributionWindow: string;
     /**
-     * @generated from protobuf field: repeated merlion.oracle.v1.Denom whitelist = 5;
-     */
-    whitelist: Denom[];
-    /**
-     * @generated from protobuf field: string slash_fraction = 6;
+     * @generated from protobuf field: string slash_fraction = 5;
      */
     slashFraction: string;
     /**
-     * @generated from protobuf field: uint64 slash_window = 7;
+     * @generated from protobuf field: uint64 slash_window = 6;
      */
     slashWindow: string;
     /**
-     * @generated from protobuf field: string min_valid_per_window = 8;
+     * @generated from protobuf field: string min_valid_per_window = 7;
      */
     minValidPerWindow: string;
-}
-/**
- * Denom represents an object to hold configurations of each denom
- *
- * @generated from protobuf message merlion.oracle.v1.Denom
- */
-export interface Denom {
-    /**
-     * @generated from protobuf field: string name = 1;
-     */
-    name: string;
 }
 /**
  * AggregateExchangeRatePrevote represents the aggregate prevoting on the
@@ -114,6 +99,94 @@ export interface ExchangeRateTuple {
      */
     exchangeRate: string;
 }
+/**
+ * RegisterTargetProposal is a gov Content type to register eligible
+ * target asset which will be price quoted.
+ *
+ * @generated from protobuf message merlion.oracle.v1.RegisterTargetProposal
+ */
+export interface RegisterTargetProposal {
+    /**
+     * title of the proposal
+     *
+     * @generated from protobuf field: string title = 1;
+     */
+    title: string;
+    /**
+     * proposal description
+     *
+     * @generated from protobuf field: string description = 2;
+     */
+    description: string;
+    /**
+     * target params
+     *
+     * @generated from protobuf field: merlion.oracle.v1.TargetParams target_params = 3;
+     */
+    targetParams?: TargetParams;
+}
+/**
+ * @generated from protobuf message merlion.oracle.v1.TargetParams
+ */
+export interface TargetParams {
+    /**
+     * coin denom
+     *
+     * @generated from protobuf field: string denom = 1;
+     */
+    denom: string;
+    /**
+     * quotation source
+     *
+     * @generated from protobuf field: merlion.oracle.v1.TargetSource source = 2;
+     */
+    source: TargetSource;
+    /**
+     * quotation source DEX contract address
+     *
+     * @generated from protobuf field: string source_dex_contract = 3;
+     */
+    sourceDexContract: string;
+}
+/**
+ * TargetSource enumerates the quotation source of a target asset.
+ *
+ * @generated from protobuf enum merlion.oracle.v1.TargetSource
+ */
+export enum TargetSource {
+    /**
+     * TARGET_SOURCE_UNSPECIFIED defines an invalid/undefined target source.
+     *
+     * @generated from protobuf enum value: TARGET_SOURCE_UNSPECIFIED = 0;
+     */
+    UNSPECIFIED = 0,
+    /**
+     * TARGET_SOURCE_VALIDATORS target quotation source is from validators.
+     *
+     * @generated from protobuf enum value: TARGET_SOURCE_VALIDATORS = 1;
+     */
+    VALIDATORS = 1,
+    /**
+     * TARGET_SOURCE_DEX target quotation source is from on-chain DEX.
+     *
+     * @generated from protobuf enum value: TARGET_SOURCE_DEX = 2;
+     */
+    DEX = 2,
+    /**
+     * TARGET_SOURCE_INTERCHAIN_DEX target quotation source is from inter-chain
+     * DEX.
+     *
+     * @generated from protobuf enum value: TARGET_SOURCE_INTERCHAIN_DEX = 3;
+     */
+    INTERCHAIN_DEX = 3,
+    /**
+     * TARGET_SOURCE_INTERCHAIN_ORACLE target quotation source is from inter-chain
+     * oracle.
+     *
+     * @generated from protobuf enum value: TARGET_SOURCE_INTERCHAIN_ORACLE = 4;
+     */
+    INTERCHAIN_ORACLE = 4
+}
 // @generated message type with reflection information, may provide speed optimized methods
 class Params$Type extends MessageType<Params> {
     constructor() {
@@ -122,14 +195,13 @@ class Params$Type extends MessageType<Params> {
             { no: 2, name: "vote_threshold", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"vote_threshold\"" } },
             { no: 3, name: "reward_band", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"reward_band\"" } },
             { no: 4, name: "reward_distribution_window", kind: "scalar", T: 4 /*ScalarType.UINT64*/, options: { "gogoproto.moretags": "yaml:\"reward_distribution_window\"" } },
-            { no: 5, name: "whitelist", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Denom, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"whitelist\"", "gogoproto.castrepeated": "DenomList" } },
-            { no: 6, name: "slash_fraction", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"slash_fraction\"" } },
-            { no: 7, name: "slash_window", kind: "scalar", T: 4 /*ScalarType.UINT64*/, options: { "gogoproto.moretags": "yaml:\"slash_window\"" } },
-            { no: 8, name: "min_valid_per_window", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"min_valid_per_window\"" } }
+            { no: 5, name: "slash_fraction", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"slash_fraction\"" } },
+            { no: 6, name: "slash_window", kind: "scalar", T: 4 /*ScalarType.UINT64*/, options: { "gogoproto.moretags": "yaml:\"slash_window\"" } },
+            { no: 7, name: "min_valid_per_window", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"min_valid_per_window\"" } }
         ], { "gogoproto.goproto_stringer": false, "gogoproto.equal": true });
     }
     create(value?: PartialMessage<Params>): Params {
-        const message = { votePeriod: "0", voteThreshold: "", rewardBand: "", rewardDistributionWindow: "0", whitelist: [], slashFraction: "", slashWindow: "0", minValidPerWindow: "" };
+        const message = { votePeriod: "0", voteThreshold: "", rewardBand: "", rewardDistributionWindow: "0", slashFraction: "", slashWindow: "0", minValidPerWindow: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Params>(this, message, value);
@@ -152,16 +224,13 @@ class Params$Type extends MessageType<Params> {
                 case /* uint64 reward_distribution_window */ 4:
                     message.rewardDistributionWindow = reader.uint64().toString();
                     break;
-                case /* repeated merlion.oracle.v1.Denom whitelist */ 5:
-                    message.whitelist.push(Denom.internalBinaryRead(reader, reader.uint32(), options));
-                    break;
-                case /* string slash_fraction */ 6:
+                case /* string slash_fraction */ 5:
                     message.slashFraction = reader.string();
                     break;
-                case /* uint64 slash_window */ 7:
+                case /* uint64 slash_window */ 6:
                     message.slashWindow = reader.uint64().toString();
                     break;
-                case /* string min_valid_per_window */ 8:
+                case /* string min_valid_per_window */ 7:
                     message.minValidPerWindow = reader.string();
                     break;
                 default:
@@ -188,18 +257,15 @@ class Params$Type extends MessageType<Params> {
         /* uint64 reward_distribution_window = 4; */
         if (message.rewardDistributionWindow !== "0")
             writer.tag(4, WireType.Varint).uint64(message.rewardDistributionWindow);
-        /* repeated merlion.oracle.v1.Denom whitelist = 5; */
-        for (let i = 0; i < message.whitelist.length; i++)
-            Denom.internalBinaryWrite(message.whitelist[i], writer.tag(5, WireType.LengthDelimited).fork(), options).join();
-        /* string slash_fraction = 6; */
+        /* string slash_fraction = 5; */
         if (message.slashFraction !== "")
-            writer.tag(6, WireType.LengthDelimited).string(message.slashFraction);
-        /* uint64 slash_window = 7; */
+            writer.tag(5, WireType.LengthDelimited).string(message.slashFraction);
+        /* uint64 slash_window = 6; */
         if (message.slashWindow !== "0")
-            writer.tag(7, WireType.Varint).uint64(message.slashWindow);
-        /* string min_valid_per_window = 8; */
+            writer.tag(6, WireType.Varint).uint64(message.slashWindow);
+        /* string min_valid_per_window = 7; */
         if (message.minValidPerWindow !== "")
-            writer.tag(8, WireType.LengthDelimited).string(message.minValidPerWindow);
+            writer.tag(7, WireType.LengthDelimited).string(message.minValidPerWindow);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -210,53 +276,6 @@ class Params$Type extends MessageType<Params> {
  * @generated MessageType for protobuf message merlion.oracle.v1.Params
  */
 export const Params = new Params$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class Denom$Type extends MessageType<Denom> {
-    constructor() {
-        super("merlion.oracle.v1.Denom", [
-            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"name\"" } }
-        ], { "gogoproto.goproto_getters": false, "gogoproto.goproto_stringer": false, "gogoproto.equal": false });
-    }
-    create(value?: PartialMessage<Denom>): Denom {
-        const message = { name: "" };
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<Denom>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: Denom): Denom {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* string name */ 1:
-                    message.name = reader.string();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: Denom, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string name = 1; */
-        if (message.name !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.name);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message merlion.oracle.v1.Denom
- */
-export const Denom = new Denom$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class AggregateExchangeRatePrevote$Type extends MessageType<AggregateExchangeRatePrevote> {
     constructor() {
@@ -426,3 +445,125 @@ class ExchangeRateTuple$Type extends MessageType<ExchangeRateTuple> {
  * @generated MessageType for protobuf message merlion.oracle.v1.ExchangeRateTuple
  */
 export const ExchangeRateTuple = new ExchangeRateTuple$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class RegisterTargetProposal$Type extends MessageType<RegisterTargetProposal> {
+    constructor() {
+        super("merlion.oracle.v1.RegisterTargetProposal", [
+            { no: 1, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "description", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "target_params", kind: "message", T: () => TargetParams, options: { "gogoproto.nullable": false } }
+        ], { "gogoproto.equal": false });
+    }
+    create(value?: PartialMessage<RegisterTargetProposal>): RegisterTargetProposal {
+        const message = { title: "", description: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<RegisterTargetProposal>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: RegisterTargetProposal): RegisterTargetProposal {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string title */ 1:
+                    message.title = reader.string();
+                    break;
+                case /* string description */ 2:
+                    message.description = reader.string();
+                    break;
+                case /* merlion.oracle.v1.TargetParams target_params */ 3:
+                    message.targetParams = TargetParams.internalBinaryRead(reader, reader.uint32(), options, message.targetParams);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: RegisterTargetProposal, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string title = 1; */
+        if (message.title !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.title);
+        /* string description = 2; */
+        if (message.description !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.description);
+        /* merlion.oracle.v1.TargetParams target_params = 3; */
+        if (message.targetParams)
+            TargetParams.internalBinaryWrite(message.targetParams, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.oracle.v1.RegisterTargetProposal
+ */
+export const RegisterTargetProposal = new RegisterTargetProposal$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class TargetParams$Type extends MessageType<TargetParams> {
+    constructor() {
+        super("merlion.oracle.v1.TargetParams", [
+            { no: 1, name: "denom", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "source", kind: "enum", T: () => ["merlion.oracle.v1.TargetSource", TargetSource, "TARGET_SOURCE_"] },
+            { no: 3, name: "source_dex_contract", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ], { "gogoproto.equal": false });
+    }
+    create(value?: PartialMessage<TargetParams>): TargetParams {
+        const message = { denom: "", source: 0, sourceDexContract: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<TargetParams>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: TargetParams): TargetParams {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string denom */ 1:
+                    message.denom = reader.string();
+                    break;
+                case /* merlion.oracle.v1.TargetSource source */ 2:
+                    message.source = reader.int32();
+                    break;
+                case /* string source_dex_contract */ 3:
+                    message.sourceDexContract = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: TargetParams, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string denom = 1; */
+        if (message.denom !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.denom);
+        /* merlion.oracle.v1.TargetSource source = 2; */
+        if (message.source !== 0)
+            writer.tag(2, WireType.Varint).int32(message.source);
+        /* string source_dex_contract = 3; */
+        if (message.sourceDexContract !== "")
+            writer.tag(3, WireType.LengthDelimited).string(message.sourceDexContract);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.oracle.v1.TargetParams
+ */
+export const TargetParams = new TargetParams$Type();

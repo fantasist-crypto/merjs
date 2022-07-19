@@ -28,17 +28,21 @@ export interface MsgMintBySwap {
      */
     to: string;
     /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_out = 3;
-     */
-    mintOut?: Coin;
-    /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_in_max = 4;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_in_max = 3;
      */
     backingInMax?: Coin;
     /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in_max = 5;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in_max = 4;
      */
     lionInMax?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_out_min = 5;
+     */
+    mintOutMin?: Coin;
+    /**
+     * @generated from protobuf field: bool full_backing = 6;
+     */
+    fullBacking: boolean;
 }
 /**
  * MsgMintBySwapResponse defines the Msg/MintBySwap response type.
@@ -47,17 +51,21 @@ export interface MsgMintBySwap {
  */
 export interface MsgMintBySwapResponse {
     /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_fee = 1;
-     */
-    mintFee?: Coin;
-    /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_in = 2;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_in = 1;
      */
     backingIn?: Coin;
     /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in = 3;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in = 2;
      */
     lionIn?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_out = 3;
+     */
+    mintOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_fee = 4;
+     */
+    mintFee?: Coin;
 }
 /**
  * MsgBurnBySwap represents a message to burn Mer stablecoins by swapping.
@@ -93,17 +101,17 @@ export interface MsgBurnBySwap {
  */
 export interface MsgBurnBySwapResponse {
     /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin burn_fee = 1;
-     */
-    burnFee?: Coin;
-    /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_out = 2;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_out = 1;
      */
     backingOut?: Coin;
     /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_out = 3;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_out = 2;
      */
     lionOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin burn_fee = 3;
+     */
+    burnFee?: Coin;
 }
 /**
  * MsgBuyBacking represents a message to buy strong-backing assets.
@@ -138,6 +146,10 @@ export interface MsgBuyBackingResponse {
      * @generated from protobuf field: cosmos.base.v1beta1.Coin backing_out = 1;
      */
     backingOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin buyback_fee = 2;
+     */
+    buybackFee?: Coin;
 }
 /**
  * MsgSellBacking represents a message to sell strong-backing
@@ -173,6 +185,10 @@ export interface MsgSellBackingResponse {
      * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_out = 1;
      */
     lionOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin reback_fee = 2;
+     */
+    rebackFee?: Coin;
 }
 /**
  * MsgMintByCollateral represents a message to mint Mer stablecoins by locking
@@ -197,10 +213,6 @@ export interface MsgMintByCollateral {
      * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_out = 4;
      */
     mintOut?: Coin;
-    /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in_max = 5;
-     */
-    lionInMax?: Coin;
 }
 /**
  * MsgMintByCollateralResponse defines the Msg/MintByCollateral response type.
@@ -212,10 +224,6 @@ export interface MsgMintByCollateralResponse {
      * @generated from protobuf field: cosmos.base.v1beta1.Coin mint_fee = 1;
      */
     mintFee?: Coin;
-    /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in = 2;
-     */
-    lionIn?: Coin;
 }
 /**
  * MsgBurnByCollateral represents a message to burn Mer stablecoins by unlocking
@@ -263,9 +271,13 @@ export interface MsgDepositCollateral {
      */
     to: string;
     /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin collateral = 3;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin collateral_in = 3;
      */
-    collateral?: Coin;
+    collateralIn?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_in = 4;
+     */
+    lionIn?: Coin;
 }
 /**
  * MsgDepositCollateralResponse defines the Msg/DepositCollateral response type.
@@ -275,7 +287,8 @@ export interface MsgDepositCollateral {
 export interface MsgDepositCollateralResponse {
 }
 /**
- * MsgRedeemCollateral represents a message to redeem collateral assets.
+ * MsgRedeemCollateral represents a message to redeem collateral assets and
+ * collateralized Lion coins.
  *
  * @generated from protobuf message merlion.maker.v1.MsgRedeemCollateral
  */
@@ -289,9 +302,13 @@ export interface MsgRedeemCollateral {
      */
     to: string;
     /**
-     * @generated from protobuf field: cosmos.base.v1beta1.Coin collateral = 3;
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin collateral_out = 3;
      */
-    collateral?: Coin;
+    collateralOut?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin lion_out = 4;
+     */
+    lionOut?: Coin;
 }
 /**
  * MsgRedeemCollateralResponse defines the Msg/RedeemCollateral response type.
@@ -322,9 +339,14 @@ export interface MsgLiquidateCollateral {
      * @generated from protobuf field: cosmos.base.v1beta1.Coin collateral = 4;
      */
     collateral?: Coin;
+    /**
+     * @generated from protobuf field: cosmos.base.v1beta1.Coin repay_in_max = 5;
+     */
+    repayInMax?: Coin;
 }
 /**
- * MsgReCollateralizeResponse defines the Msg/LiquidateCollateral response type.
+ * MsgLiquidateCollateralResponse defines the Msg/LiquidateCollateral response
+ * type.
  *
  * @generated from protobuf message merlion.maker.v1.MsgLiquidateCollateralResponse
  */
@@ -342,15 +364,16 @@ export interface MsgLiquidateCollateralResponse {
 class MsgMintBySwap$Type extends MessageType<MsgMintBySwap> {
     constructor() {
         super("merlion.maker.v1.MsgMintBySwap", [
-            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"sender\"" } },
-            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"to\"" } },
-            { no: 3, name: "mint_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"mint_out\"" } },
-            { no: 4, name: "backing_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_in_max\"" } },
-            { no: 5, name: "lion_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_in_max\"" } }
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "sender", "gogoproto.moretags": "yaml:\"sender\"" } },
+            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "to", "gogoproto.moretags": "yaml:\"to\"" } },
+            { no: 3, name: "backing_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_in_max\"" } },
+            { no: 4, name: "lion_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_in_max\"" } },
+            { no: 5, name: "mint_out_min", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"mint_out_min\"" } },
+            { no: 6, name: "full_backing", kind: "scalar", T: 8 /*ScalarType.BOOL*/, options: { "gogoproto.jsontag": "full_backing", "gogoproto.moretags": "yaml:\"full_backing\"" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }
     create(value?: PartialMessage<MsgMintBySwap>): MsgMintBySwap {
-        const message = { sender: "", to: "" };
+        const message = { sender: "", to: "", fullBacking: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<MsgMintBySwap>(this, message, value);
@@ -367,14 +390,17 @@ class MsgMintBySwap$Type extends MessageType<MsgMintBySwap> {
                 case /* string to */ 2:
                     message.to = reader.string();
                     break;
-                case /* cosmos.base.v1beta1.Coin mint_out */ 3:
-                    message.mintOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintOut);
-                    break;
-                case /* cosmos.base.v1beta1.Coin backing_in_max */ 4:
+                case /* cosmos.base.v1beta1.Coin backing_in_max */ 3:
                     message.backingInMax = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingInMax);
                     break;
-                case /* cosmos.base.v1beta1.Coin lion_in_max */ 5:
+                case /* cosmos.base.v1beta1.Coin lion_in_max */ 4:
                     message.lionInMax = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionInMax);
+                    break;
+                case /* cosmos.base.v1beta1.Coin mint_out_min */ 5:
+                    message.mintOutMin = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintOutMin);
+                    break;
+                case /* bool full_backing */ 6:
+                    message.fullBacking = reader.bool();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -394,15 +420,18 @@ class MsgMintBySwap$Type extends MessageType<MsgMintBySwap> {
         /* string to = 2; */
         if (message.to !== "")
             writer.tag(2, WireType.LengthDelimited).string(message.to);
-        /* cosmos.base.v1beta1.Coin mint_out = 3; */
-        if (message.mintOut)
-            Coin.internalBinaryWrite(message.mintOut, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin backing_in_max = 4; */
+        /* cosmos.base.v1beta1.Coin backing_in_max = 3; */
         if (message.backingInMax)
-            Coin.internalBinaryWrite(message.backingInMax, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin lion_in_max = 5; */
+            Coin.internalBinaryWrite(message.backingInMax, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_in_max = 4; */
         if (message.lionInMax)
-            Coin.internalBinaryWrite(message.lionInMax, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+            Coin.internalBinaryWrite(message.lionInMax, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin mint_out_min = 5; */
+        if (message.mintOutMin)
+            Coin.internalBinaryWrite(message.mintOutMin, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        /* bool full_backing = 6; */
+        if (message.fullBacking !== false)
+            writer.tag(6, WireType.Varint).bool(message.fullBacking);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -417,9 +446,10 @@ export const MsgMintBySwap = new MsgMintBySwap$Type();
 class MsgMintBySwapResponse$Type extends MessageType<MsgMintBySwapResponse> {
     constructor() {
         super("merlion.maker.v1.MsgMintBySwapResponse", [
-            { no: 1, name: "mint_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"mint_fee\"" } },
-            { no: 2, name: "backing_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_in\"" } },
-            { no: 3, name: "lion_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_in\"" } }
+            { no: 1, name: "backing_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_in\"" } },
+            { no: 2, name: "lion_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_in\"" } },
+            { no: 3, name: "mint_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"mint_out\"" } },
+            { no: 4, name: "mint_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"mint_fee\"" } }
         ]);
     }
     create(value?: PartialMessage<MsgMintBySwapResponse>): MsgMintBySwapResponse {
@@ -434,14 +464,17 @@ class MsgMintBySwapResponse$Type extends MessageType<MsgMintBySwapResponse> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* cosmos.base.v1beta1.Coin mint_fee */ 1:
-                    message.mintFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintFee);
-                    break;
-                case /* cosmos.base.v1beta1.Coin backing_in */ 2:
+                case /* cosmos.base.v1beta1.Coin backing_in */ 1:
                     message.backingIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingIn);
                     break;
-                case /* cosmos.base.v1beta1.Coin lion_in */ 3:
+                case /* cosmos.base.v1beta1.Coin lion_in */ 2:
                     message.lionIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionIn);
+                    break;
+                case /* cosmos.base.v1beta1.Coin mint_out */ 3:
+                    message.mintOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintOut);
+                    break;
+                case /* cosmos.base.v1beta1.Coin mint_fee */ 4:
+                    message.mintFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintFee);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -455,15 +488,18 @@ class MsgMintBySwapResponse$Type extends MessageType<MsgMintBySwapResponse> {
         return message;
     }
     internalBinaryWrite(message: MsgMintBySwapResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* cosmos.base.v1beta1.Coin mint_fee = 1; */
-        if (message.mintFee)
-            Coin.internalBinaryWrite(message.mintFee, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin backing_in = 2; */
+        /* cosmos.base.v1beta1.Coin backing_in = 1; */
         if (message.backingIn)
-            Coin.internalBinaryWrite(message.backingIn, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin lion_in = 3; */
+            Coin.internalBinaryWrite(message.backingIn, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_in = 2; */
         if (message.lionIn)
-            Coin.internalBinaryWrite(message.lionIn, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+            Coin.internalBinaryWrite(message.lionIn, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin mint_out = 3; */
+        if (message.mintOut)
+            Coin.internalBinaryWrite(message.mintOut, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin mint_fee = 4; */
+        if (message.mintFee)
+            Coin.internalBinaryWrite(message.mintFee, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -478,8 +514,8 @@ export const MsgMintBySwapResponse = new MsgMintBySwapResponse$Type();
 class MsgBurnBySwap$Type extends MessageType<MsgBurnBySwap> {
     constructor() {
         super("merlion.maker.v1.MsgBurnBySwap", [
-            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"sender\"" } },
-            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"to\"" } },
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "sender", "gogoproto.moretags": "yaml:\"sender\"" } },
+            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "to", "gogoproto.moretags": "yaml:\"to\"" } },
             { no: 3, name: "burn_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"burn_in\"" } },
             { no: 4, name: "backing_out_min", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_out_min\"" } },
             { no: 5, name: "lion_out_min", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_out_min\"" } }
@@ -553,9 +589,9 @@ export const MsgBurnBySwap = new MsgBurnBySwap$Type();
 class MsgBurnBySwapResponse$Type extends MessageType<MsgBurnBySwapResponse> {
     constructor() {
         super("merlion.maker.v1.MsgBurnBySwapResponse", [
-            { no: 1, name: "burn_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"burn_fee\"" } },
-            { no: 2, name: "backing_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_out\"" } },
-            { no: 3, name: "lion_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_out\"" } }
+            { no: 1, name: "backing_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_out\"" } },
+            { no: 2, name: "lion_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_out\"" } },
+            { no: 3, name: "burn_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"burn_fee\"" } }
         ]);
     }
     create(value?: PartialMessage<MsgBurnBySwapResponse>): MsgBurnBySwapResponse {
@@ -570,14 +606,14 @@ class MsgBurnBySwapResponse$Type extends MessageType<MsgBurnBySwapResponse> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* cosmos.base.v1beta1.Coin burn_fee */ 1:
-                    message.burnFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.burnFee);
-                    break;
-                case /* cosmos.base.v1beta1.Coin backing_out */ 2:
+                case /* cosmos.base.v1beta1.Coin backing_out */ 1:
                     message.backingOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingOut);
                     break;
-                case /* cosmos.base.v1beta1.Coin lion_out */ 3:
+                case /* cosmos.base.v1beta1.Coin lion_out */ 2:
                     message.lionOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionOut);
+                    break;
+                case /* cosmos.base.v1beta1.Coin burn_fee */ 3:
+                    message.burnFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.burnFee);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -591,15 +627,15 @@ class MsgBurnBySwapResponse$Type extends MessageType<MsgBurnBySwapResponse> {
         return message;
     }
     internalBinaryWrite(message: MsgBurnBySwapResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* cosmos.base.v1beta1.Coin burn_fee = 1; */
-        if (message.burnFee)
-            Coin.internalBinaryWrite(message.burnFee, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin backing_out = 2; */
+        /* cosmos.base.v1beta1.Coin backing_out = 1; */
         if (message.backingOut)
-            Coin.internalBinaryWrite(message.backingOut, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin lion_out = 3; */
+            Coin.internalBinaryWrite(message.backingOut, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_out = 2; */
         if (message.lionOut)
-            Coin.internalBinaryWrite(message.lionOut, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+            Coin.internalBinaryWrite(message.lionOut, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin burn_fee = 3; */
+        if (message.burnFee)
+            Coin.internalBinaryWrite(message.burnFee, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -614,8 +650,8 @@ export const MsgBurnBySwapResponse = new MsgBurnBySwapResponse$Type();
 class MsgBuyBacking$Type extends MessageType<MsgBuyBacking> {
     constructor() {
         super("merlion.maker.v1.MsgBuyBacking", [
-            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"sender\"" } },
-            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"to\"" } },
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "sender", "gogoproto.moretags": "yaml:\"sender\"" } },
+            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "to", "gogoproto.moretags": "yaml:\"to\"" } },
             { no: 3, name: "lion_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_in\"" } },
             { no: 4, name: "backing_out_min", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_out_min\"" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
@@ -682,7 +718,8 @@ export const MsgBuyBacking = new MsgBuyBacking$Type();
 class MsgBuyBackingResponse$Type extends MessageType<MsgBuyBackingResponse> {
     constructor() {
         super("merlion.maker.v1.MsgBuyBackingResponse", [
-            { no: 1, name: "backing_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_out\"" } }
+            { no: 1, name: "backing_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_out\"" } },
+            { no: 2, name: "buyback_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"buyback_fee\"" } }
         ]);
     }
     create(value?: PartialMessage<MsgBuyBackingResponse>): MsgBuyBackingResponse {
@@ -700,6 +737,9 @@ class MsgBuyBackingResponse$Type extends MessageType<MsgBuyBackingResponse> {
                 case /* cosmos.base.v1beta1.Coin backing_out */ 1:
                     message.backingOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.backingOut);
                     break;
+                case /* cosmos.base.v1beta1.Coin buyback_fee */ 2:
+                    message.buybackFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.buybackFee);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -715,6 +755,9 @@ class MsgBuyBackingResponse$Type extends MessageType<MsgBuyBackingResponse> {
         /* cosmos.base.v1beta1.Coin backing_out = 1; */
         if (message.backingOut)
             Coin.internalBinaryWrite(message.backingOut, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin buyback_fee = 2; */
+        if (message.buybackFee)
+            Coin.internalBinaryWrite(message.buybackFee, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -729,8 +772,8 @@ export const MsgBuyBackingResponse = new MsgBuyBackingResponse$Type();
 class MsgSellBacking$Type extends MessageType<MsgSellBacking> {
     constructor() {
         super("merlion.maker.v1.MsgSellBacking", [
-            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"sender\"" } },
-            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"to\"" } },
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "sender", "gogoproto.moretags": "yaml:\"sender\"" } },
+            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "to", "gogoproto.moretags": "yaml:\"to\"" } },
             { no: 3, name: "backing_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"backing_in\"" } },
             { no: 4, name: "lion_out_min", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_out_min\"" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
@@ -797,7 +840,8 @@ export const MsgSellBacking = new MsgSellBacking$Type();
 class MsgSellBackingResponse$Type extends MessageType<MsgSellBackingResponse> {
     constructor() {
         super("merlion.maker.v1.MsgSellBackingResponse", [
-            { no: 1, name: "lion_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_out\"" } }
+            { no: 1, name: "lion_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_out\"" } },
+            { no: 2, name: "reback_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"reback_fee\"" } }
         ]);
     }
     create(value?: PartialMessage<MsgSellBackingResponse>): MsgSellBackingResponse {
@@ -815,6 +859,9 @@ class MsgSellBackingResponse$Type extends MessageType<MsgSellBackingResponse> {
                 case /* cosmos.base.v1beta1.Coin lion_out */ 1:
                     message.lionOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionOut);
                     break;
+                case /* cosmos.base.v1beta1.Coin reback_fee */ 2:
+                    message.rebackFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.rebackFee);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -830,6 +877,9 @@ class MsgSellBackingResponse$Type extends MessageType<MsgSellBackingResponse> {
         /* cosmos.base.v1beta1.Coin lion_out = 1; */
         if (message.lionOut)
             Coin.internalBinaryWrite(message.lionOut, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin reback_fee = 2; */
+        if (message.rebackFee)
+            Coin.internalBinaryWrite(message.rebackFee, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -844,11 +894,10 @@ export const MsgSellBackingResponse = new MsgSellBackingResponse$Type();
 class MsgMintByCollateral$Type extends MessageType<MsgMintByCollateral> {
     constructor() {
         super("merlion.maker.v1.MsgMintByCollateral", [
-            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"sender\"" } },
-            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"to\"" } },
-            { no: 3, name: "collateral_denom", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"collateral_denom\"" } },
-            { no: 4, name: "mint_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"mint_out\"" } },
-            { no: 5, name: "lion_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_in_max\"" } }
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "sender", "gogoproto.moretags": "yaml:\"sender\"" } },
+            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "to", "gogoproto.moretags": "yaml:\"to\"" } },
+            { no: 3, name: "collateral_denom", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "collateral_denom", "gogoproto.moretags": "yaml:\"collateral_denom\"" } },
+            { no: 4, name: "mint_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"mint_out\"" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }
     create(value?: PartialMessage<MsgMintByCollateral>): MsgMintByCollateral {
@@ -875,9 +924,6 @@ class MsgMintByCollateral$Type extends MessageType<MsgMintByCollateral> {
                 case /* cosmos.base.v1beta1.Coin mint_out */ 4:
                     message.mintOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintOut);
                     break;
-                case /* cosmos.base.v1beta1.Coin lion_in_max */ 5:
-                    message.lionInMax = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionInMax);
-                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -902,9 +948,6 @@ class MsgMintByCollateral$Type extends MessageType<MsgMintByCollateral> {
         /* cosmos.base.v1beta1.Coin mint_out = 4; */
         if (message.mintOut)
             Coin.internalBinaryWrite(message.mintOut, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin lion_in_max = 5; */
-        if (message.lionInMax)
-            Coin.internalBinaryWrite(message.lionInMax, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -919,8 +962,7 @@ export const MsgMintByCollateral = new MsgMintByCollateral$Type();
 class MsgMintByCollateralResponse$Type extends MessageType<MsgMintByCollateralResponse> {
     constructor() {
         super("merlion.maker.v1.MsgMintByCollateralResponse", [
-            { no: 1, name: "mint_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"mint_fee\"" } },
-            { no: 2, name: "lion_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_in\"" } }
+            { no: 1, name: "mint_fee", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"mint_fee\"" } }
         ]);
     }
     create(value?: PartialMessage<MsgMintByCollateralResponse>): MsgMintByCollateralResponse {
@@ -938,9 +980,6 @@ class MsgMintByCollateralResponse$Type extends MessageType<MsgMintByCollateralRe
                 case /* cosmos.base.v1beta1.Coin mint_fee */ 1:
                     message.mintFee = Coin.internalBinaryRead(reader, reader.uint32(), options, message.mintFee);
                     break;
-                case /* cosmos.base.v1beta1.Coin lion_in */ 2:
-                    message.lionIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionIn);
-                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -956,9 +995,6 @@ class MsgMintByCollateralResponse$Type extends MessageType<MsgMintByCollateralRe
         /* cosmos.base.v1beta1.Coin mint_fee = 1; */
         if (message.mintFee)
             Coin.internalBinaryWrite(message.mintFee, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* cosmos.base.v1beta1.Coin lion_in = 2; */
-        if (message.lionIn)
-            Coin.internalBinaryWrite(message.lionIn, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -973,8 +1009,8 @@ export const MsgMintByCollateralResponse = new MsgMintByCollateralResponse$Type(
 class MsgBurnByCollateral$Type extends MessageType<MsgBurnByCollateral> {
     constructor() {
         super("merlion.maker.v1.MsgBurnByCollateral", [
-            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"sender\"" } },
-            { no: 2, name: "collateral_denom", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"collateral_denom\"" } },
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "sender", "gogoproto.moretags": "yaml:\"sender\"" } },
+            { no: 2, name: "collateral_denom", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "collateral_denom", "gogoproto.moretags": "yaml:\"collateral_denom\"" } },
             { no: 3, name: "repay_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"repay_in_max\"" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }
@@ -1081,9 +1117,10 @@ export const MsgBurnByCollateralResponse = new MsgBurnByCollateralResponse$Type(
 class MsgDepositCollateral$Type extends MessageType<MsgDepositCollateral> {
     constructor() {
         super("merlion.maker.v1.MsgDepositCollateral", [
-            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"sender\"" } },
-            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"to\"" } },
-            { no: 3, name: "collateral", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"collateral\"" } }
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "sender", "gogoproto.moretags": "yaml:\"sender\"" } },
+            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "to", "gogoproto.moretags": "yaml:\"to\"" } },
+            { no: 3, name: "collateral_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"collateral_in\"" } },
+            { no: 4, name: "lion_in", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_in\"" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }
     create(value?: PartialMessage<MsgDepositCollateral>): MsgDepositCollateral {
@@ -1104,8 +1141,11 @@ class MsgDepositCollateral$Type extends MessageType<MsgDepositCollateral> {
                 case /* string to */ 2:
                     message.to = reader.string();
                     break;
-                case /* cosmos.base.v1beta1.Coin collateral */ 3:
-                    message.collateral = Coin.internalBinaryRead(reader, reader.uint32(), options, message.collateral);
+                case /* cosmos.base.v1beta1.Coin collateral_in */ 3:
+                    message.collateralIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.collateralIn);
+                    break;
+                case /* cosmos.base.v1beta1.Coin lion_in */ 4:
+                    message.lionIn = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionIn);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1125,9 +1165,12 @@ class MsgDepositCollateral$Type extends MessageType<MsgDepositCollateral> {
         /* string to = 2; */
         if (message.to !== "")
             writer.tag(2, WireType.LengthDelimited).string(message.to);
-        /* cosmos.base.v1beta1.Coin collateral = 3; */
-        if (message.collateral)
-            Coin.internalBinaryWrite(message.collateral, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin collateral_in = 3; */
+        if (message.collateralIn)
+            Coin.internalBinaryWrite(message.collateralIn, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_in = 4; */
+        if (message.lionIn)
+            Coin.internalBinaryWrite(message.lionIn, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1168,9 +1211,10 @@ export const MsgDepositCollateralResponse = new MsgDepositCollateralResponse$Typ
 class MsgRedeemCollateral$Type extends MessageType<MsgRedeemCollateral> {
     constructor() {
         super("merlion.maker.v1.MsgRedeemCollateral", [
-            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"sender\"" } },
-            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"to\"" } },
-            { no: 3, name: "collateral", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"collateral\"" } }
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "sender", "gogoproto.moretags": "yaml:\"sender\"" } },
+            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "to", "gogoproto.moretags": "yaml:\"to\"" } },
+            { no: 3, name: "collateral_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"collateral_out\"" } },
+            { no: 4, name: "lion_out", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"lion_out\"" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }
     create(value?: PartialMessage<MsgRedeemCollateral>): MsgRedeemCollateral {
@@ -1191,8 +1235,11 @@ class MsgRedeemCollateral$Type extends MessageType<MsgRedeemCollateral> {
                 case /* string to */ 2:
                     message.to = reader.string();
                     break;
-                case /* cosmos.base.v1beta1.Coin collateral */ 3:
-                    message.collateral = Coin.internalBinaryRead(reader, reader.uint32(), options, message.collateral);
+                case /* cosmos.base.v1beta1.Coin collateral_out */ 3:
+                    message.collateralOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.collateralOut);
+                    break;
+                case /* cosmos.base.v1beta1.Coin lion_out */ 4:
+                    message.lionOut = Coin.internalBinaryRead(reader, reader.uint32(), options, message.lionOut);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1212,9 +1259,12 @@ class MsgRedeemCollateral$Type extends MessageType<MsgRedeemCollateral> {
         /* string to = 2; */
         if (message.to !== "")
             writer.tag(2, WireType.LengthDelimited).string(message.to);
-        /* cosmos.base.v1beta1.Coin collateral = 3; */
-        if (message.collateral)
-            Coin.internalBinaryWrite(message.collateral, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin collateral_out = 3; */
+        if (message.collateralOut)
+            Coin.internalBinaryWrite(message.collateralOut, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin lion_out = 4; */
+        if (message.lionOut)
+            Coin.internalBinaryWrite(message.lionOut, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1255,10 +1305,11 @@ export const MsgRedeemCollateralResponse = new MsgRedeemCollateralResponse$Type(
 class MsgLiquidateCollateral$Type extends MessageType<MsgLiquidateCollateral> {
     constructor() {
         super("merlion.maker.v1.MsgLiquidateCollateral", [
-            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"sender\"" } },
-            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"to\"" } },
+            { no: 1, name: "sender", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "sender", "gogoproto.moretags": "yaml:\"sender\"" } },
+            { no: 2, name: "to", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.jsontag": "to", "gogoproto.moretags": "yaml:\"to\"" } },
             { no: 3, name: "debtor", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.moretags": "yaml:\"to\"" } },
-            { no: 4, name: "collateral", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"collateral\"" } }
+            { no: 4, name: "collateral", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"collateral\"" } },
+            { no: 5, name: "repay_in_max", kind: "message", T: () => Coin, options: { "gogoproto.nullable": false, "gogoproto.moretags": "yaml:\"repay_in_max\"" } }
         ], { "gogoproto.goproto_getters": false, "gogoproto.equal": false });
     }
     create(value?: PartialMessage<MsgLiquidateCollateral>): MsgLiquidateCollateral {
@@ -1285,6 +1336,9 @@ class MsgLiquidateCollateral$Type extends MessageType<MsgLiquidateCollateral> {
                 case /* cosmos.base.v1beta1.Coin collateral */ 4:
                     message.collateral = Coin.internalBinaryRead(reader, reader.uint32(), options, message.collateral);
                     break;
+                case /* cosmos.base.v1beta1.Coin repay_in_max */ 5:
+                    message.repayInMax = Coin.internalBinaryRead(reader, reader.uint32(), options, message.repayInMax);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -1309,6 +1363,9 @@ class MsgLiquidateCollateral$Type extends MessageType<MsgLiquidateCollateral> {
         /* cosmos.base.v1beta1.Coin collateral = 4; */
         if (message.collateral)
             Coin.internalBinaryWrite(message.collateral, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.v1beta1.Coin repay_in_max = 5; */
+        if (message.repayInMax)
+            Coin.internalBinaryWrite(message.repayInMax, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

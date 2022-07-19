@@ -4,16 +4,18 @@
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { Query } from "./query";
-import type { EstimateBurnByCollateralInResponse } from "./query";
-import type { EstimateBurnByCollateralInRequest } from "./query";
-import type { EstimateMintByCollateralInResponse } from "./query";
-import type { EstimateMintByCollateralInRequest } from "./query";
 import type { EstimateSellBackingOutResponse } from "./query";
 import type { EstimateSellBackingOutRequest } from "./query";
+import type { EstimateSellBackingInResponse } from "./query";
+import type { EstimateSellBackingInRequest } from "./query";
 import type { EstimateBuyBackingOutResponse } from "./query";
 import type { EstimateBuyBackingOutRequest } from "./query";
+import type { EstimateBuyBackingInResponse } from "./query";
+import type { EstimateBuyBackingInRequest } from "./query";
 import type { EstimateBurnBySwapOutResponse } from "./query";
 import type { EstimateBurnBySwapOutRequest } from "./query";
+import type { EstimateBurnBySwapInResponse } from "./query";
+import type { EstimateBurnBySwapInRequest } from "./query";
 import type { EstimateMintBySwapOutResponse } from "./query";
 import type { EstimateMintBySwapOutRequest } from "./query";
 import type { EstimateMintBySwapInResponse } from "./query";
@@ -128,11 +130,23 @@ export interface IQueryClient {
      */
     estimateMintBySwapOut(input: EstimateMintBySwapOutRequest, options?: RpcOptions): UnaryCall<EstimateMintBySwapOutRequest, EstimateMintBySwapOutResponse>;
     /**
+     * EstimateBurnBySwapIn estimates input of burning by swap.
+     *
+     * @generated from protobuf rpc: EstimateBurnBySwapIn(merlion.maker.v1.EstimateBurnBySwapInRequest) returns (merlion.maker.v1.EstimateBurnBySwapInResponse);
+     */
+    estimateBurnBySwapIn(input: EstimateBurnBySwapInRequest, options?: RpcOptions): UnaryCall<EstimateBurnBySwapInRequest, EstimateBurnBySwapInResponse>;
+    /**
      * EstimateBurnBySwapOut estimates output of burning by swap.
      *
      * @generated from protobuf rpc: EstimateBurnBySwapOut(merlion.maker.v1.EstimateBurnBySwapOutRequest) returns (merlion.maker.v1.EstimateBurnBySwapOutResponse);
      */
     estimateBurnBySwapOut(input: EstimateBurnBySwapOutRequest, options?: RpcOptions): UnaryCall<EstimateBurnBySwapOutRequest, EstimateBurnBySwapOutResponse>;
+    /**
+     * EstimateBuyBackingIn estimates inpput of buying backing assets.
+     *
+     * @generated from protobuf rpc: EstimateBuyBackingIn(merlion.maker.v1.EstimateBuyBackingInRequest) returns (merlion.maker.v1.EstimateBuyBackingInResponse);
+     */
+    estimateBuyBackingIn(input: EstimateBuyBackingInRequest, options?: RpcOptions): UnaryCall<EstimateBuyBackingInRequest, EstimateBuyBackingInResponse>;
     /**
      * EstimateBuyBackingOut estimates output of buying backing assets.
      *
@@ -140,23 +154,17 @@ export interface IQueryClient {
      */
     estimateBuyBackingOut(input: EstimateBuyBackingOutRequest, options?: RpcOptions): UnaryCall<EstimateBuyBackingOutRequest, EstimateBuyBackingOutResponse>;
     /**
+     * EstimateSellBackingIn estimates input of selling backing assets.
+     *
+     * @generated from protobuf rpc: EstimateSellBackingIn(merlion.maker.v1.EstimateSellBackingInRequest) returns (merlion.maker.v1.EstimateSellBackingInResponse);
+     */
+    estimateSellBackingIn(input: EstimateSellBackingInRequest, options?: RpcOptions): UnaryCall<EstimateSellBackingInRequest, EstimateSellBackingInResponse>;
+    /**
      * EstimateSellBackingOut estimates output of selling backing assets.
      *
      * @generated from protobuf rpc: EstimateSellBackingOut(merlion.maker.v1.EstimateSellBackingOutRequest) returns (merlion.maker.v1.EstimateSellBackingOutResponse);
      */
     estimateSellBackingOut(input: EstimateSellBackingOutRequest, options?: RpcOptions): UnaryCall<EstimateSellBackingOutRequest, EstimateSellBackingOutResponse>;
-    /**
-     * EstimateMintByCollateralIn estimates input of minting by collateral.
-     *
-     * @generated from protobuf rpc: EstimateMintByCollateralIn(merlion.maker.v1.EstimateMintByCollateralInRequest) returns (merlion.maker.v1.EstimateMintByCollateralInResponse);
-     */
-    estimateMintByCollateralIn(input: EstimateMintByCollateralInRequest, options?: RpcOptions): UnaryCall<EstimateMintByCollateralInRequest, EstimateMintByCollateralInResponse>;
-    /**
-     * EstimateBurnByCollateralIn estimates input of burning by collateral.
-     *
-     * @generated from protobuf rpc: EstimateBurnByCollateralIn(merlion.maker.v1.EstimateBurnByCollateralInRequest) returns (merlion.maker.v1.EstimateBurnByCollateralInResponse);
-     */
-    estimateBurnByCollateralIn(input: EstimateBurnByCollateralInRequest, options?: RpcOptions): UnaryCall<EstimateBurnByCollateralInRequest, EstimateBurnByCollateralInResponse>;
 }
 /**
  * Query defines the maker gRPC querier service.
@@ -287,13 +295,31 @@ export class QueryClient implements IQueryClient, ServiceInfo {
         return stackIntercept<EstimateMintBySwapOutRequest, EstimateMintBySwapOutResponse>("unary", this._transport, method, opt, input);
     }
     /**
+     * EstimateBurnBySwapIn estimates input of burning by swap.
+     *
+     * @generated from protobuf rpc: EstimateBurnBySwapIn(merlion.maker.v1.EstimateBurnBySwapInRequest) returns (merlion.maker.v1.EstimateBurnBySwapInResponse);
+     */
+    estimateBurnBySwapIn(input: EstimateBurnBySwapInRequest, options?: RpcOptions): UnaryCall<EstimateBurnBySwapInRequest, EstimateBurnBySwapInResponse> {
+        const method = this.methods[13], opt = this._transport.mergeOptions(options);
+        return stackIntercept<EstimateBurnBySwapInRequest, EstimateBurnBySwapInResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
      * EstimateBurnBySwapOut estimates output of burning by swap.
      *
      * @generated from protobuf rpc: EstimateBurnBySwapOut(merlion.maker.v1.EstimateBurnBySwapOutRequest) returns (merlion.maker.v1.EstimateBurnBySwapOutResponse);
      */
     estimateBurnBySwapOut(input: EstimateBurnBySwapOutRequest, options?: RpcOptions): UnaryCall<EstimateBurnBySwapOutRequest, EstimateBurnBySwapOutResponse> {
-        const method = this.methods[13], opt = this._transport.mergeOptions(options);
+        const method = this.methods[14], opt = this._transport.mergeOptions(options);
         return stackIntercept<EstimateBurnBySwapOutRequest, EstimateBurnBySwapOutResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * EstimateBuyBackingIn estimates inpput of buying backing assets.
+     *
+     * @generated from protobuf rpc: EstimateBuyBackingIn(merlion.maker.v1.EstimateBuyBackingInRequest) returns (merlion.maker.v1.EstimateBuyBackingInResponse);
+     */
+    estimateBuyBackingIn(input: EstimateBuyBackingInRequest, options?: RpcOptions): UnaryCall<EstimateBuyBackingInRequest, EstimateBuyBackingInResponse> {
+        const method = this.methods[15], opt = this._transport.mergeOptions(options);
+        return stackIntercept<EstimateBuyBackingInRequest, EstimateBuyBackingInResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * EstimateBuyBackingOut estimates output of buying backing assets.
@@ -301,8 +327,17 @@ export class QueryClient implements IQueryClient, ServiceInfo {
      * @generated from protobuf rpc: EstimateBuyBackingOut(merlion.maker.v1.EstimateBuyBackingOutRequest) returns (merlion.maker.v1.EstimateBuyBackingOutResponse);
      */
     estimateBuyBackingOut(input: EstimateBuyBackingOutRequest, options?: RpcOptions): UnaryCall<EstimateBuyBackingOutRequest, EstimateBuyBackingOutResponse> {
-        const method = this.methods[14], opt = this._transport.mergeOptions(options);
+        const method = this.methods[16], opt = this._transport.mergeOptions(options);
         return stackIntercept<EstimateBuyBackingOutRequest, EstimateBuyBackingOutResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * EstimateSellBackingIn estimates input of selling backing assets.
+     *
+     * @generated from protobuf rpc: EstimateSellBackingIn(merlion.maker.v1.EstimateSellBackingInRequest) returns (merlion.maker.v1.EstimateSellBackingInResponse);
+     */
+    estimateSellBackingIn(input: EstimateSellBackingInRequest, options?: RpcOptions): UnaryCall<EstimateSellBackingInRequest, EstimateSellBackingInResponse> {
+        const method = this.methods[17], opt = this._transport.mergeOptions(options);
+        return stackIntercept<EstimateSellBackingInRequest, EstimateSellBackingInResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * EstimateSellBackingOut estimates output of selling backing assets.
@@ -310,25 +345,7 @@ export class QueryClient implements IQueryClient, ServiceInfo {
      * @generated from protobuf rpc: EstimateSellBackingOut(merlion.maker.v1.EstimateSellBackingOutRequest) returns (merlion.maker.v1.EstimateSellBackingOutResponse);
      */
     estimateSellBackingOut(input: EstimateSellBackingOutRequest, options?: RpcOptions): UnaryCall<EstimateSellBackingOutRequest, EstimateSellBackingOutResponse> {
-        const method = this.methods[15], opt = this._transport.mergeOptions(options);
+        const method = this.methods[18], opt = this._transport.mergeOptions(options);
         return stackIntercept<EstimateSellBackingOutRequest, EstimateSellBackingOutResponse>("unary", this._transport, method, opt, input);
-    }
-    /**
-     * EstimateMintByCollateralIn estimates input of minting by collateral.
-     *
-     * @generated from protobuf rpc: EstimateMintByCollateralIn(merlion.maker.v1.EstimateMintByCollateralInRequest) returns (merlion.maker.v1.EstimateMintByCollateralInResponse);
-     */
-    estimateMintByCollateralIn(input: EstimateMintByCollateralInRequest, options?: RpcOptions): UnaryCall<EstimateMintByCollateralInRequest, EstimateMintByCollateralInResponse> {
-        const method = this.methods[16], opt = this._transport.mergeOptions(options);
-        return stackIntercept<EstimateMintByCollateralInRequest, EstimateMintByCollateralInResponse>("unary", this._transport, method, opt, input);
-    }
-    /**
-     * EstimateBurnByCollateralIn estimates input of burning by collateral.
-     *
-     * @generated from protobuf rpc: EstimateBurnByCollateralIn(merlion.maker.v1.EstimateBurnByCollateralInRequest) returns (merlion.maker.v1.EstimateBurnByCollateralInResponse);
-     */
-    estimateBurnByCollateralIn(input: EstimateBurnByCollateralInRequest, options?: RpcOptions): UnaryCall<EstimateBurnByCollateralInRequest, EstimateBurnByCollateralInResponse> {
-        const method = this.methods[17], opt = this._transport.mergeOptions(options);
-        return stackIntercept<EstimateBurnByCollateralInRequest, EstimateBurnByCollateralInResponse>("unary", this._transport, method, opt, input);
     }
 }

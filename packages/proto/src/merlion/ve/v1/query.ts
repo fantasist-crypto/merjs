@@ -13,6 +13,9 @@ import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MESSAGE_TYPE } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 import { Params } from "./genesis";
+import { PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { NFT } from "../../../cosmos/nft/v1beta1/nft";
+import { PageRequest } from "../../../cosmos/base/query/v1beta1/pagination";
 /**
  * @generated from protobuf message merlion.ve.v1.QueryTotalVotingPowerRequest
  */
@@ -60,6 +63,58 @@ export interface QueryVotingPowerResponse {
      * @generated from protobuf field: string power = 1;
      */
     power: string;
+}
+/**
+ * QueryVeNftsRequest is the request type for the Query/VeNfts RPC method
+ *
+ * @generated from protobuf message merlion.ve.v1.QueryVeNftsRequest
+ */
+export interface QueryVeNftsRequest {
+    /**
+     * @generated from protobuf field: string owner = 1;
+     */
+    owner: string;
+    /**
+     * @generated from protobuf field: cosmos.base.query.v1beta1.PageRequest pagination = 2;
+     */
+    pagination?: PageRequest;
+}
+/**
+ * QueryVeNftsResponse is the response type for the Query/VeNfts RPC methods
+ *
+ * @generated from protobuf message merlion.ve.v1.QueryVeNftsResponse
+ */
+export interface QueryVeNftsResponse {
+    /**
+     * @generated from protobuf field: repeated cosmos.nft.v1beta1.NFT nfts = 1;
+     */
+    nfts: NFT[];
+    /**
+     * @generated from protobuf field: cosmos.base.query.v1beta1.PageResponse pagination = 2;
+     */
+    pagination?: PageResponse;
+}
+/**
+ * QueryVeNftRequest is the request type for the Query/VeNft RPC method
+ *
+ * @generated from protobuf message merlion.ve.v1.QueryVeNftRequest
+ */
+export interface QueryVeNftRequest {
+    /**
+     * @generated from protobuf field: string id = 1;
+     */
+    id: string;
+}
+/**
+ * QueryVeNftResponse is the response type for the Query/VeNft RPC method
+ *
+ * @generated from protobuf message merlion.ve.v1.QueryVeNftResponse
+ */
+export interface QueryVeNftResponse {
+    /**
+     * @generated from protobuf field: cosmos.nft.v1beta1.NFT nft = 1;
+     */
+    nft?: NFT;
 }
 /**
  * QueryParamsRequest is request type for the Query/Params RPC method.
@@ -291,6 +346,208 @@ class QueryVotingPowerResponse$Type extends MessageType<QueryVotingPowerResponse
  */
 export const QueryVotingPowerResponse = new QueryVotingPowerResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
+class QueryVeNftsRequest$Type extends MessageType<QueryVeNftsRequest> {
+    constructor() {
+        super("merlion.ve.v1.QueryVeNftsRequest", [
+            { no: 1, name: "owner", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "pagination", kind: "message", T: () => PageRequest }
+        ]);
+    }
+    create(value?: PartialMessage<QueryVeNftsRequest>): QueryVeNftsRequest {
+        const message = { owner: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<QueryVeNftsRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryVeNftsRequest): QueryVeNftsRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string owner */ 1:
+                    message.owner = reader.string();
+                    break;
+                case /* cosmos.base.query.v1beta1.PageRequest pagination */ 2:
+                    message.pagination = PageRequest.internalBinaryRead(reader, reader.uint32(), options, message.pagination);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: QueryVeNftsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string owner = 1; */
+        if (message.owner !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.owner);
+        /* cosmos.base.query.v1beta1.PageRequest pagination = 2; */
+        if (message.pagination)
+            PageRequest.internalBinaryWrite(message.pagination, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.ve.v1.QueryVeNftsRequest
+ */
+export const QueryVeNftsRequest = new QueryVeNftsRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class QueryVeNftsResponse$Type extends MessageType<QueryVeNftsResponse> {
+    constructor() {
+        super("merlion.ve.v1.QueryVeNftsResponse", [
+            { no: 1, name: "nfts", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => NFT },
+            { no: 2, name: "pagination", kind: "message", T: () => PageResponse }
+        ]);
+    }
+    create(value?: PartialMessage<QueryVeNftsResponse>): QueryVeNftsResponse {
+        const message = { nfts: [] };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<QueryVeNftsResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryVeNftsResponse): QueryVeNftsResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* repeated cosmos.nft.v1beta1.NFT nfts */ 1:
+                    message.nfts.push(NFT.internalBinaryRead(reader, reader.uint32(), options));
+                    break;
+                case /* cosmos.base.query.v1beta1.PageResponse pagination */ 2:
+                    message.pagination = PageResponse.internalBinaryRead(reader, reader.uint32(), options, message.pagination);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: QueryVeNftsResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* repeated cosmos.nft.v1beta1.NFT nfts = 1; */
+        for (let i = 0; i < message.nfts.length; i++)
+            NFT.internalBinaryWrite(message.nfts[i], writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* cosmos.base.query.v1beta1.PageResponse pagination = 2; */
+        if (message.pagination)
+            PageResponse.internalBinaryWrite(message.pagination, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.ve.v1.QueryVeNftsResponse
+ */
+export const QueryVeNftsResponse = new QueryVeNftsResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class QueryVeNftRequest$Type extends MessageType<QueryVeNftRequest> {
+    constructor() {
+        super("merlion.ve.v1.QueryVeNftRequest", [
+            { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<QueryVeNftRequest>): QueryVeNftRequest {
+        const message = { id: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<QueryVeNftRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryVeNftRequest): QueryVeNftRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string id */ 1:
+                    message.id = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: QueryVeNftRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string id = 1; */
+        if (message.id !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.id);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.ve.v1.QueryVeNftRequest
+ */
+export const QueryVeNftRequest = new QueryVeNftRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class QueryVeNftResponse$Type extends MessageType<QueryVeNftResponse> {
+    constructor() {
+        super("merlion.ve.v1.QueryVeNftResponse", [
+            { no: 1, name: "nft", kind: "message", T: () => NFT }
+        ]);
+    }
+    create(value?: PartialMessage<QueryVeNftResponse>): QueryVeNftResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<QueryVeNftResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryVeNftResponse): QueryVeNftResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* cosmos.nft.v1beta1.NFT nft */ 1:
+                    message.nft = NFT.internalBinaryRead(reader, reader.uint32(), options, message.nft);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: QueryVeNftResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* cosmos.nft.v1beta1.NFT nft = 1; */
+        if (message.nft)
+            NFT.internalBinaryWrite(message.nft, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.ve.v1.QueryVeNftResponse
+ */
+export const QueryVeNftResponse = new QueryVeNftResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
 class QueryParamsRequest$Type extends MessageType<QueryParamsRequest> {
     constructor() {
         super("merlion.ve.v1.QueryParamsRequest", []);
@@ -369,5 +626,7 @@ export const QueryParamsResponse = new QueryParamsResponse$Type();
 export const Query = new ServiceType("merlion.ve.v1.Query", [
     { name: "TotalVotingPower", options: { "google.api.http": { get: "/merlion/ve/v1/total_voting_power" } }, I: QueryTotalVotingPowerRequest, O: QueryTotalVotingPowerResponse },
     { name: "VotingPower", options: { "google.api.http": { get: "/merlion/ve/v1/voting_power/{ve_id}" } }, I: QueryVotingPowerRequest, O: QueryVotingPowerResponse },
+    { name: "VeNfts", options: { "google.api.http": { get: "/merlion/ve/v1/venfts" } }, I: QueryVeNftsRequest, O: QueryVeNftsResponse },
+    { name: "VeNft", options: { "google.api.http": { get: "/merlion/ve/v1/venfts/{id}" } }, I: QueryVeNftRequest, O: QueryVeNftResponse },
     { name: "Params", options: { "google.api.http": { get: "/merlion/ve/v1/params" } }, I: QueryParamsRequest, O: QueryParamsResponse }
 ]);

@@ -6,6 +6,10 @@ import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { Query } from "./query";
 import type { QueryParamsResponse } from "./query";
 import type { QueryParamsRequest } from "./query";
+import type { QueryVeNftResponse } from "./query";
+import type { QueryVeNftRequest } from "./query";
+import type { QueryVeNftsResponse } from "./query";
+import type { QueryVeNftsRequest } from "./query";
 import type { QueryVotingPowerResponse } from "./query";
 import type { QueryVotingPowerRequest } from "./query";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
@@ -31,6 +35,18 @@ export interface IQueryClient {
      * @generated from protobuf rpc: VotingPower(merlion.ve.v1.QueryVotingPowerRequest) returns (merlion.ve.v1.QueryVotingPowerResponse);
      */
     votingPower(input: QueryVotingPowerRequest, options?: RpcOptions): UnaryCall<QueryVotingPowerRequest, QueryVotingPowerResponse>;
+    /**
+     * VeNfts queries all veNFTs of a given owner.
+     *
+     * @generated from protobuf rpc: VeNfts(merlion.ve.v1.QueryVeNftsRequest) returns (merlion.ve.v1.QueryVeNftsResponse);
+     */
+    veNfts(input: QueryVeNftsRequest, options?: RpcOptions): UnaryCall<QueryVeNftsRequest, QueryVeNftsResponse>;
+    /**
+     * VeNft queries an veNFT based on its id.
+     *
+     * @generated from protobuf rpc: VeNft(merlion.ve.v1.QueryVeNftRequest) returns (merlion.ve.v1.QueryVeNftResponse);
+     */
+    veNft(input: QueryVeNftRequest, options?: RpcOptions): UnaryCall<QueryVeNftRequest, QueryVeNftResponse>;
     /**
      * Parameters queries the parameters of the module.
      *
@@ -68,12 +84,30 @@ export class QueryClient implements IQueryClient, ServiceInfo {
         return stackIntercept<QueryVotingPowerRequest, QueryVotingPowerResponse>("unary", this._transport, method, opt, input);
     }
     /**
+     * VeNfts queries all veNFTs of a given owner.
+     *
+     * @generated from protobuf rpc: VeNfts(merlion.ve.v1.QueryVeNftsRequest) returns (merlion.ve.v1.QueryVeNftsResponse);
+     */
+    veNfts(input: QueryVeNftsRequest, options?: RpcOptions): UnaryCall<QueryVeNftsRequest, QueryVeNftsResponse> {
+        const method = this.methods[2], opt = this._transport.mergeOptions(options);
+        return stackIntercept<QueryVeNftsRequest, QueryVeNftsResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * VeNft queries an veNFT based on its id.
+     *
+     * @generated from protobuf rpc: VeNft(merlion.ve.v1.QueryVeNftRequest) returns (merlion.ve.v1.QueryVeNftResponse);
+     */
+    veNft(input: QueryVeNftRequest, options?: RpcOptions): UnaryCall<QueryVeNftRequest, QueryVeNftResponse> {
+        const method = this.methods[3], opt = this._transport.mergeOptions(options);
+        return stackIntercept<QueryVeNftRequest, QueryVeNftResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
      * Parameters queries the parameters of the module.
      *
      * @generated from protobuf rpc: Params(merlion.ve.v1.QueryParamsRequest) returns (merlion.ve.v1.QueryParamsResponse);
      */
     params(input: QueryParamsRequest, options?: RpcOptions): UnaryCall<QueryParamsRequest, QueryParamsResponse> {
-        const method = this.methods[2], opt = this._transport.mergeOptions(options);
+        const method = this.methods[4], opt = this._transport.mergeOptions(options);
         return stackIntercept<QueryParamsRequest, QueryParamsResponse>("unary", this._transport, method, opt, input);
     }
 }

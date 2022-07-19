@@ -63,11 +63,11 @@ export interface Params {
      */
     burnPriceBias: string;
     /**
-     * recollateralization bonus ratio
+     * reback bonus ratio
      *
-     * @generated from protobuf field: string recollateralize_bonus = 6;
+     * @generated from protobuf field: string reback_bonus = 6;
      */
-    recollateralizeBonus: string;
+    rebackBonus: string;
     /**
      * liquidation commission fee ratio
      *
@@ -138,12 +138,12 @@ class Params$Type extends MessageType<Params> {
             { no: 3, name: "backing_ratio_cooldown_period", kind: "scalar", T: 3 /*ScalarType.INT64*/, options: { "gogoproto.moretags": "yaml:\"backing_ratio_cooldown_period\"" } },
             { no: 4, name: "mint_price_bias", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"mint_price_bias\"" } },
             { no: 5, name: "burn_price_bias", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"burn_price_bias\"" } },
-            { no: 6, name: "recollateralize_bonus", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"recollateralize_bonus\"" } },
+            { no: 6, name: "reback_bonus", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"reback_bonus\"" } },
             { no: 7, name: "liquidation_commission_fee", kind: "scalar", T: 9 /*ScalarType.STRING*/, options: { "gogoproto.nullable": false, "gogoproto.customtype": "github.com/cosmos/cosmos-sdk/types.Dec", "gogoproto.moretags": "yaml:\"liquidation_commission_fee\"" } }
         ], { "gogoproto.goproto_stringer": false, "gogoproto.equal": true });
     }
     create(value?: PartialMessage<Params>): Params {
-        const message = { backingRatioStep: "", backingRatioPriceBand: "", backingRatioCooldownPeriod: "0", mintPriceBias: "", burnPriceBias: "", recollateralizeBonus: "", liquidationCommissionFee: "" };
+        const message = { backingRatioStep: "", backingRatioPriceBand: "", backingRatioCooldownPeriod: "0", mintPriceBias: "", burnPriceBias: "", rebackBonus: "", liquidationCommissionFee: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Params>(this, message, value);
@@ -169,8 +169,8 @@ class Params$Type extends MessageType<Params> {
                 case /* string burn_price_bias */ 5:
                     message.burnPriceBias = reader.string();
                     break;
-                case /* string recollateralize_bonus */ 6:
-                    message.recollateralizeBonus = reader.string();
+                case /* string reback_bonus */ 6:
+                    message.rebackBonus = reader.string();
                     break;
                 case /* string liquidation_commission_fee */ 7:
                     message.liquidationCommissionFee = reader.string();
@@ -202,9 +202,9 @@ class Params$Type extends MessageType<Params> {
         /* string burn_price_bias = 5; */
         if (message.burnPriceBias !== "")
             writer.tag(5, WireType.LengthDelimited).string(message.burnPriceBias);
-        /* string recollateralize_bonus = 6; */
-        if (message.recollateralizeBonus !== "")
-            writer.tag(6, WireType.LengthDelimited).string(message.recollateralizeBonus);
+        /* string reback_bonus = 6; */
+        if (message.rebackBonus !== "")
+            writer.tag(6, WireType.LengthDelimited).string(message.rebackBonus);
         /* string liquidation_commission_fee = 7; */
         if (message.liquidationCommissionFee !== "")
             writer.tag(7, WireType.LengthDelimited).string(message.liquidationCommissionFee);

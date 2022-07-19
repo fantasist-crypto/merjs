@@ -79,7 +79,7 @@ export interface IMsgClient {
      */
     depositCollateral(input: MsgDepositCollateral, options?: RpcOptions): UnaryCall<MsgDepositCollateral, MsgDepositCollateralResponse>;
     /**
-     * RedeemCollateral redeems collateral assets.
+     * RedeemCollateral redeems collateral assets and collateralized Lion coins.
      *
      * @generated from protobuf rpc: RedeemCollateral(merlion.maker.v1.MsgRedeemCollateral) returns (merlion.maker.v1.MsgRedeemCollateralResponse);
      */
@@ -172,7 +172,7 @@ export class MsgClient implements IMsgClient, ServiceInfo {
         return stackIntercept<MsgDepositCollateral, MsgDepositCollateralResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * RedeemCollateral redeems collateral assets.
+     * RedeemCollateral redeems collateral assets and collateralized Lion coins.
      *
      * @generated from protobuf rpc: RedeemCollateral(merlion.maker.v1.MsgRedeemCollateral) returns (merlion.maker.v1.MsgRedeemCollateralResponse);
      */

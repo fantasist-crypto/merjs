@@ -114,6 +114,29 @@ export interface QueryVoteTargetsResponse {
     voteTargets: string[];
 }
 /**
+ * QueryTargetsRequest is the request type for the Query/Targets RPC
+ * method.
+ *
+ * @generated from protobuf message merlion.oracle.v1.QueryTargetsRequest
+ */
+export interface QueryTargetsRequest {
+}
+/**
+ * QueryTargetsResponse is response type for the
+ * Query/Targets RPC method.
+ *
+ * @generated from protobuf message merlion.oracle.v1.QueryTargetsResponse
+ */
+export interface QueryTargetsResponse {
+    /**
+     * targets defines a list of the denomination which will be fed
+     * with price quotation (including voting targets).
+     *
+     * @generated from protobuf field: repeated string targets = 1;
+     */
+    targets: string[];
+}
+/**
  * QueryFeederDelegationRequest is the request type for the
  * Query/FeederDelegation RPC method.
  *
@@ -606,6 +629,79 @@ class QueryVoteTargetsResponse$Type extends MessageType<QueryVoteTargetsResponse
  * @generated MessageType for protobuf message merlion.oracle.v1.QueryVoteTargetsResponse
  */
 export const QueryVoteTargetsResponse = new QueryVoteTargetsResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class QueryTargetsRequest$Type extends MessageType<QueryTargetsRequest> {
+    constructor() {
+        super("merlion.oracle.v1.QueryTargetsRequest", []);
+    }
+    create(value?: PartialMessage<QueryTargetsRequest>): QueryTargetsRequest {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<QueryTargetsRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryTargetsRequest): QueryTargetsRequest {
+        return target ?? this.create();
+    }
+    internalBinaryWrite(message: QueryTargetsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.oracle.v1.QueryTargetsRequest
+ */
+export const QueryTargetsRequest = new QueryTargetsRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class QueryTargetsResponse$Type extends MessageType<QueryTargetsResponse> {
+    constructor() {
+        super("merlion.oracle.v1.QueryTargetsResponse", [
+            { no: 1, name: "targets", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<QueryTargetsResponse>): QueryTargetsResponse {
+        const message = { targets: [] };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<QueryTargetsResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: QueryTargetsResponse): QueryTargetsResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* repeated string targets */ 1:
+                    message.targets.push(reader.string());
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: QueryTargetsResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* repeated string targets = 1; */
+        for (let i = 0; i < message.targets.length; i++)
+            writer.tag(1, WireType.LengthDelimited).string(message.targets[i]);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message merlion.oracle.v1.QueryTargetsResponse
+ */
+export const QueryTargetsResponse = new QueryTargetsResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class QueryFeederDelegationRequest$Type extends MessageType<QueryFeederDelegationRequest> {
     constructor() {
@@ -1209,6 +1305,7 @@ export const Query = new ServiceType("merlion.oracle.v1.Query", [
     { name: "ExchangeRates", options: { "google.api.http": { get: "/merlion/oracle/v1/denoms/exchange_rates" } }, I: QueryExchangeRatesRequest, O: QueryExchangeRatesResponse },
     { name: "Actives", options: { "google.api.http": { get: "/merlion/oracle/v1/denoms/actives" } }, I: QueryActivesRequest, O: QueryActivesResponse },
     { name: "VoteTargets", options: { "google.api.http": { get: "/merlion/oracle/v1/denoms/vote_targets" } }, I: QueryVoteTargetsRequest, O: QueryVoteTargetsResponse },
+    { name: "Targets", options: { "google.api.http": { get: "/merlion/oracle/v1/denoms/targets" } }, I: QueryTargetsRequest, O: QueryTargetsResponse },
     { name: "FeederDelegation", options: { "google.api.http": { get: "/merlion/oracle/v1/validators/{validator_addr}/feeder" } }, I: QueryFeederDelegationRequest, O: QueryFeederDelegationResponse },
     { name: "MissCounter", options: { "google.api.http": { get: "/merlion/oracle/v1/validators/{validator_addr}/miss" } }, I: QueryMissCounterRequest, O: QueryMissCounterResponse },
     { name: "AggregatePrevote", options: { "google.api.http": { get: "/merlion/oracle/v1/validators/{validator_addr}/aggregate_prevote" } }, I: QueryAggregatePrevoteRequest, O: QueryAggregatePrevoteResponse },
