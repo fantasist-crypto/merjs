@@ -6,10 +6,31 @@ import type {
 import type { BaseVestingAccount } from '@merjs/proto/cosmos/vesting/v1beta1/vesting'
 import type { EthAccount } from '@merjs/proto/ethermint/types/v1/account'
 
-type AccountData = {
-  type: 'EthAccount' | 'BaseAccount' | 'ModuleAccount' | 'BaseVestingAccount'
-  account: EthAccount | BaseAccount | ModuleAccount | BaseVestingAccount
+export type EthAccountData = {
+  type: 'EthAccount'
+  account: EthAccount
 }
+
+export type BaseAccountData = {
+  type: 'BaseAccount'
+  account: BaseAccount
+}
+
+export type ModuleAccountData = {
+  type: 'ModuleAccount'
+  account: ModuleAccount
+}
+
+export type BaseVestingAccountData = {
+  type: 'BaseVestingAccount'
+  account: BaseVestingAccount
+}
+
+type AccountData =
+  | EthAccountData
+  | BaseAccountData
+  | ModuleAccountData
+  | BaseVestingAccountData
 
 export type Account = AccountData
 
@@ -53,4 +74,8 @@ export async function accountFromAny({
     default:
       throw new Error(`Unsupported type: ${typeUrl}`)
   }
+}
+
+export function isBaseAccount(account: Account): account is BaseAccountData {
+  return account.type === 'BaseAccount'
 }

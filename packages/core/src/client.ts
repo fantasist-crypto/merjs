@@ -42,7 +42,12 @@ import {
 } from './tx'
 import { getQuerier, Querier } from './query'
 import { isOfflineDirectSigner, OfflineSigner, ReadonlySigner } from './signer'
-import { accountFromAny, encodeEthSecp256k1PubKey, encodePubKey } from './utils'
+import {
+  accountFromAny,
+  encodeEthSecp256k1PubKey,
+  encodePubKey,
+  isBaseAccount,
+} from './utils'
 
 export interface CreateOptions {
   /** A gRPC-web url, by default on port 9091 */
@@ -226,18 +231,15 @@ export class MerlionClient {
         )
       }
 
-      if (account.type === 'EthAccount') {
-        const ethAccount = account.account as EthAccount
-        signerData = {
-          accountNumber: Number(ethAccount.baseAccount?.accountNumber),
-          sequence: Number(ethAccount.baseAccount?.sequence),
-          chainId: this.chainId,
-        }
-      }
+      const baseAccount = !isBaseAccount(account)
+        ? account.account.baseAccount
+        : account.account
+
+      if (!baseAccount) throw new Error('Will not happen')
 
       signerData = {
-        accountNumber: Number((account.account as BaseAccount).accountNumber),
-        sequence: Number((account.account as BaseAccount).sequence),
+        accountNumber: Number(baseAccount.accountNumber),
+        sequence: Number(baseAccount.sequence),
         chainId: this.chainId,
       }
     }
